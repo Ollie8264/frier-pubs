@@ -1,38 +1,58 @@
 # Frier's Useful Pub Map — Next Steps
 
-## 🚀 Ship it (do first when ready)
-1. **Deploy to Vercel** — get a public URL to share with mates (frier-pubs.vercel.app)
-2. **Commit & push to GitHub** — back up the work
-3. **Open Graph meta tags** — proper preview when sharing in WhatsApp/iMessage. Use cartoon logo on cream background.
+## ✅ Done
+- ~~Deploy to Vercel~~ → **https://frier-pubs.vercel.app**
+- ~~Commit & push to GitHub~~ → **https://github.com/Ollie8264/frier-pubs**
+- ~~Open Graph meta tags + dynamic OG image~~
+- ~~Error boundary~~
+- ~~Loading skeletons~~
+- ~~Sitemap + robots.txt~~
+- ~~Supabase schema + seed script~~ (scaffolded — needs API keys to run)
 
-## 🔒 Production polish
-4. **Buy real domain** — frier-pubs.com / frierspubs.london, ~£8/yr
-5. **Error boundary** — catch React crashes, show "Something went wrong, refresh" instead of white screen
-6. **Loading skeletons** — ghost pub cards instead of spinner while loading
+## 🟡 Needs your input
 
-## 🗄️ Future-proofing
-7. **Migrate data to Supabase** — currently 1.4MB JSON shipped on every deploy. Moving to Postgres lets you:
-   - Update pub data without redeploying
-   - Accept user edits from the "Report incorrect info" link
-   - Allow user contributions (visited list, reviews, photos)
-   - Use indexed queries instead of full-scan filtering
-8. **Analytics** — Plausible or Vercel Analytics. See which filters get used, what people click.
+### Supabase migration (15 mins)
+1. Open Supabase project → SQL Editor
+2. Paste `scripts/supabase-schema.sql` and run it
+3. Get your keys from Supabase Settings → API:
+   - Project URL → `NEXT_PUBLIC_SUPABASE_URL`
+   - anon key → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - service_role key → `SUPABASE_SERVICE_ROLE_KEY`
+4. Add them to `.env.local`
+5. Run `npx tsx scripts/seed-supabase.ts` to push all 2,470 pubs
+6. Also add the public-facing two to Vercel:
+   `npx vercel env add NEXT_PUBLIC_SUPABASE_URL production`
+   `npx vercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY production`
+7. Then I can swap the API routes from JSON imports to Supabase queries
 
-## 🐛 Ongoing
-9. **Re-validate websites monthly** — pub sites die regularly. Vercel cron + the existing validator script.
-10. **Sitemap + robots.txt** — basic SEO so pubs are crawlable by Google.
+### Custom domain (5 mins, ~£8/yr)
+1. Buy `frier-pubs.com` (or whatever) on Cloudflare / Namecheap
+2. Vercel dashboard → frier-pubs → Settings → Domains → add
+3. Vercel gives DNS records, paste into your registrar
+4. Update `NEXT_PUBLIC_SITE_URL` env var to the new domain
 
-## 🎁 Wish-list features (skipped for now, revisit later)
-- Save favourites (localStorage at first, then user accounts via Supabase auth)
+### Analytics (5 mins)
+- Easiest: Vercel dashboard → frier-pubs → Analytics → Enable
+- Or: sign up for plausible.io (~£9/mo, GDPR-friendly, no cookies)
+
+## 🚀 Future improvements (when you want)
+- Re-validate websites monthly via Vercel Cron
+- Add per-pub URLs (`/pubs/[id]`) for SEO + sharing
+- Generate sitemap entries per pub once URLs exist
+- Move filtering server-side once data is in Supabase (faster on mobile)
+
+## 🎁 Wish-list features
+- Save favourites (localStorage → Supabase auth)
 - Visited check-off list
-- Pub photos (Wikipedia commons, or user-uploaded)
-- Walking distance/time (need a routing API — free OSRM exists)
-- Cuisine filter (we already pulled this from OSM cuisine tag, just need filter)
-- Crowd-sourced quiz/event nights with day-of-week
+- Pub photos (Wikipedia commons / user-uploaded to Supabase storage)
+- Walking distance/time (free OSRM routing)
+- Cuisine filter (data already in OSM, just needs filter wired up)
+- Crowd-sourced quiz/event times
 - Dark mode toggle
-- "Pubs my mates rate" — social layer
+- "Pubs my mates rate" social layer
 
 ## ⚠️ Cost watch
-- Google Places API budget: hit £70 vs £10 budget alert. **API key currently disabled in .env.local** as of 2026-05-16.
-- Before re-enabling, set a hard quota cap in Google Cloud Console (Places API → Quotas) to enforce a real spend limit.
-- Nominatim (used for area search) is free and has no usage cost — that one's safe.
+- Google Places API: **DISABLED**. £70 sunk cost, no further spend possible.
+- Supabase free tier: 500MB DB, 5GB bandwidth, 50K monthly active users. Should be fine.
+- Vercel Hobby: 100GB bandwidth/mo. Should be fine.
+- Nominatim: free, no key, fair-use limits — we comply.
