@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frier's Useful Pub Map
 
-## Getting Started
+A pub finder for central London. 2,470 pubs and bars filterable by what actually matters — food, live sport, beer gardens, real ale, pool tables, quiz nights, dog-friendly, and more.
 
-First, run the development server:
+Live: _(set `NEXT_PUBLIC_SITE_URL` after deploy)_
+
+## Stack
+
+- **Next.js 16** App Router + TypeScript
+- **Tailwind CSS v4** for styling
+- **Leaflet** + CARTO Voyager tiles for the map
+- **Supabase** Postgres for pub data (currently static JSON, migration scripted)
+- **OSM Nominatim** (free) for area search geocoding
+- **Browser Geolocation API** for "Near me"
+
+## Data sources
+
+All data is collected and cached locally — the live app makes no paid API calls.
+
+- **OpenStreetMap** (Overpass API) — base pub list, addresses, opening hours, tags
+- **Google Places API (New)** — ratings, amenity hints from review mining (one-off enrichment, now disabled)
+- **FHRS** (UK gov Food Hygiene Rating Scheme) — hygiene ratings + food confirmation
+- **Wikipedia** — historical descriptions for ~115 famous pubs
+- **Time Out London** — editorial picks ("Best pub", "Best beer garden", etc.)
+- **OSM brand/operator tags** — chain detection for Greene King, Fuller's, Young's, etc.
+
+## Local dev
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then [localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local` and fill in:
 
-## Learn More
+```
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
+SUPABASE_SERVICE_ROLE_KEY=eyJ...        # only needed for seed script
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+All scripts live in `scripts/`. Run with `npx tsx scripts/<name>.ts`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Data enrichment (mostly free)
+- `fetch-pubs.ts` — initial OSM fetch
+- `fetch-bars.ts` — add bars (amenity=bar)
+- `enrich-fhrs.ts` — FHRS hygiene + food confirmation (free)
+- `enrich-osm-extra.ts` — heritage / listed / year tags
+- `enrich-wikipedia.ts` — descriptions from Wikipedia
+- `enrich-timeout.ts` — Time Out editorial picks
+- `enrich-chains.ts` — chain-based amenity inference
+- `restore-osm-websites.ts` — restore website fields from OSM
 
-## Deploy on Vercel
+### Google Places enrichment (paid — disabled by default)
+- `enrich-pubs.ts` `enrich-sport.ts` `enrich-sparse.ts` `enrich-final.ts` `enrich-poor-pubs.ts` `audit-boroughs.ts`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Maintenance
+- `cleanup-data.ts` — remove bad names, dedupe, drop closed pubs
+- `validate-websites.ts` — probe every website URL, remove broken ones
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Supabase
+- `supabase-schema.sql` — run once in Supabase SQL editor
+- `seed-supabase.ts` — upsert all pubs from JSON to Supabase
+
+## Roadmap
+
+See [TODO.md](./TODO.md).
