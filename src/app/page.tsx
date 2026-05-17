@@ -418,10 +418,12 @@ export default function Home() {
             />
             <div className="min-w-0">
               <h1 className="font-serif text-[15px] sm:text-[22px] font-semibold text-[var(--text-primary)] tracking-tight leading-tight truncate">
-                Frier&rsquo;s Useful Pub Map
+                {/* Shorter on mobile to avoid header truncation */}
+                <span className="sm:hidden">Frier&rsquo;s Pub Map</span>
+                <span className="hidden sm:inline">Frier&rsquo;s Useful Pub Map</span>
               </h1>
               <p className="text-[10px] sm:text-[11px] text-[var(--text-muted)] tracking-wide uppercase mt-0.5 truncate">
-                Central London · {totalCount.toLocaleString()} pubs
+                {totalCount.toLocaleString()} central London pubs
               </p>
             </div>
           </div>
