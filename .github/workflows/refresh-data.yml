@@ -1,0 +1,50 @@
+name: Refresh pub data
+
+# Re-runs the FREE enrichment pipelines + website validator on a schedule
+# so the live data stays accurate. Auto-commits changes back to main, which
+# triggers a Vercel redeploy.
+#
+# Specifically does NOT run the paid Google Places enrichment.
+
+on:
+  workflow_dispatch: # manual trigger from Actions tab
+  schedule:
+    # First Sunday of every month, 4am UTC (low traffic for upstream APIs)
+    - cron: "0 4 1-7 * 0"
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Validate website URLs
+        run: npx tsx scripts/validate-websites.ts || true
+
+      - name: Re-enrich FHRS hygiene data
+        run: npx tsx scripts/enrich-fhrs.ts || true
+
+      - name: Re-fetch year-long sun data
+        run: npx tsx scripts/enrich-sun-year.ts || true
+
+      - name: Commit & push if data changed
+        run: |
+          git config user.name "frier-pubs-bot"
+          git config user.email "bot@frier.london"
+          git add src/data/*.json
+          if git diff --staged --quiet; then
+            echo "No data changes — skipping commit"
+          else
+            git commit -m "Auto: refresh pub data $(date -u +%Y-%m-%d)"
+            git push
+          fi

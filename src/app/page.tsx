@@ -472,6 +472,7 @@ export default function Home() {
                     pub={selectedPub}
                     onClose={() => setSelectedPub(null)}
                     day={sunDay}
+                    selectedDate={sunDate}
                   />
                 </div>
               )}

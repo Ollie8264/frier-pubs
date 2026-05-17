@@ -11,6 +11,8 @@ interface PubDetailProps {
   onClose: () => void;
   /** Day-of-year for sun lookup (1..365). undefined = today. */
   day?: number;
+  /** ISO date being planned (YYYY-MM-DD). Used to highlight the month in chart. */
+  selectedDate?: string | null;
 }
 
 // Cache full pub details across opens so reselecting the same pub is instant.
@@ -21,7 +23,7 @@ function cacheKey(pubId: string, day?: number): string {
   return `${pubId}|${day ?? "today"}`;
 }
 
-export default function PubDetail({ pub: summaryPub, onClose, day }: PubDetailProps) {
+export default function PubDetail({ pub: summaryPub, onClose, day, selectedDate }: PubDetailProps) {
   const key = cacheKey(summaryPub.id, day);
   // Start with the summary data the list already has, merge in full data on fetch
   const [pub, setPub] = useState<Pub>(
@@ -242,7 +244,11 @@ export default function PubDetail({ pub: summaryPub, onClose, day }: PubDetailPr
             </div>
             <SunChart
               stats={pub.sunStats}
-              currentMonth={new Date().getMonth()}
+              currentMonth={
+                selectedDate
+                  ? parseInt(selectedDate.split("-")[1], 10) - 1
+                  : new Date().getMonth()
+              }
             />
             <div className="flex items-center justify-between mt-2 text-[11px] text-[var(--text-muted)]">
               <span>
