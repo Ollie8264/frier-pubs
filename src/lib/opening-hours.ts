@@ -70,3 +70,51 @@ function parseTime(time: string): number {
   const [h, m] = time.split(":").map(Number);
   return h * 60 + m;
 }
+
+/**
+ * Returns the earliest open hour and latest close hour across the week as
+ * decimal hours (e.g. {open: 11, close: 23}). Used to clip sun-time displays
+ * so we don't tell users about 5am sun when no pub is open then.
+ *
+ * Falls back to sensible UK pub defaults (11:00 - 23:00) if hours are missing
+ * or can't be parsed.
+ */
+export function typicalOpenWindow(
+  hoursString: string | undefined
+): { open: number; close: number } {
+  const DEFAULT = { open: 11, close: 23 };
+
+  if (!hoursString) return DEFAULT;
+  if (hoursString.trim() === "24/7") return { open: 0, close: 24 };
+
+  try {
+    const rules = hoursString.split(";").map((r) => r.trim());
+    let earliestOpen = Infinity;
+    let latestClose = -Infinity;
+
+    for (const rule of rules) {
+      const match = rule.match(/^([A-Za-z, -]+?)\s+(\d{1,2}:\d{2})-(\d{1,2}:\d{2})$/);
+      if (!match) continue;
+
+      const [, , openTime, closeTime] = match;
+      const openMins = parseTime(openTime);
+      let closeMins = parseTime(closeTime);
+
+      // Handle close-after-midnight (e.g. closes 01:00 next day)
+      if (closeMins <= openMins) closeMins += 24 * 60;
+
+      if (openMins < earliestOpen) earliestOpen = openMins;
+      if (closeMins > latestClose) latestClose = closeMins;
+    }
+
+    if (earliestOpen === Infinity || latestClose === -Infinity) return DEFAULT;
+
+    return {
+      open: earliestOpen / 60,
+      // Clamp at 25 (1am next day) — sun never matters after midnight
+      close: Math.min(latestClose / 60, 25),
+    };
+  } catch {
+    return DEFAULT;
+  }
+}

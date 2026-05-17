@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Pub } from "@/lib/types";
-import { isOpenNow } from "@/lib/opening-hours";
+import { isOpenNow, typicalOpenWindow } from "@/lib/opening-hours";
 import { getAmenityChips } from "@/lib/amenity-colors";
 import SunChart from "@/components/SunChart";
 import PickButton from "@/components/PickButton";
@@ -306,24 +306,54 @@ export default function PubDetail({ pub: summaryPub, onClose, day, selectedDate,
               </span>
             </div>
 
-            {/* When the sun hits — clock-time hint */}
-            {pub.sunPattern && pub.sunStartHour !== undefined && pub.sunEndHour !== undefined && (
-              <div className="mt-3 flex items-center gap-2 bg-[var(--color-sun-bg)]/40 border border-[var(--color-sun)]/30 rounded-lg px-2.5 py-2">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-sun)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
-                  <circle cx="12" cy="12" r="4" />
-                  <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41" />
-                </svg>
-                <span className="text-[12px] text-[var(--text-primary)]">
-                  {patternLabel(pub.sunPattern)} — sun{" "}
-                  <strong>{formatHour(pub.sunStartHour)}</strong>
-                  {" to "}
-                  <strong>{formatHour(pub.sunEndHour)}</strong>
-                  {pub.peakSunHour !== undefined && (
-                    <>, peak <strong>{formatHour(pub.peakSunHour)}</strong></>
-                  )}
-                </span>
-              </div>
-            )}
+            {/* When the sun hits — clipped to when the pub is actually open */}
+            {(() => {
+              if (
+                !pub.sunPattern ||
+                pub.sunStartHour === undefined ||
+                pub.sunEndHour === undefined
+              ) return null;
+
+              const { open, close } = typicalOpenWindow(pub.openingHours);
+              const startClipped = Math.max(pub.sunStartHour, open);
+              const endClipped = Math.min(pub.sunEndHour, close);
+
+              // If no overlap with opening hours, don't show — the sun pattern
+              // happens before the pub opens or after it closes.
+              if (endClipped - startClipped < 0.5) {
+                return (
+                  <div className="mt-3 flex items-center gap-2 bg-[var(--bg-tint)] border border-[var(--border)] rounded-lg px-2.5 py-2">
+                    <span className="text-[12px] text-[var(--text-muted)]">
+                      Sunny period is mostly outside opening hours
+                    </span>
+                  </div>
+                );
+              }
+
+              // If the peak is also during open hours, mention it
+              const peakInWindow =
+                pub.peakSunHour !== undefined &&
+                pub.peakSunHour >= startClipped &&
+                pub.peakSunHour <= endClipped;
+
+              return (
+                <div className="mt-3 flex items-center gap-2 bg-[var(--color-sun-bg)]/40 border border-[var(--color-sun)]/30 rounded-lg px-2.5 py-2">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-sun)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+                    <circle cx="12" cy="12" r="4" />
+                    <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41" />
+                  </svg>
+                  <span className="text-[12px] text-[var(--text-primary)]">
+                    Sun{" "}
+                    <strong>{formatHour(startClipped)}</strong>
+                    {" to "}
+                    <strong>{formatHour(endClipped)}</strong>
+                    {peakInWindow && pub.peakSunHour !== undefined && (
+                      <>, peak <strong>{formatHour(pub.peakSunHour)}</strong></>
+                    )}
+                  </span>
+                </div>
+              );
+            })()}
           </div>
         )}
 
