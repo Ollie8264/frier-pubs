@@ -6,6 +6,9 @@ import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import "leaflet.markercluster";
+// leaflet-rotate patches L.Map with rotation support — two-finger pinch on
+// mobile, shift+drag on desktop, plus a compass control to reset bearing.
+import "leaflet-rotate";
 import { Pub } from "@/lib/types";
 
 interface MapProps {
@@ -86,11 +89,19 @@ export default function Map({ pubs, selectedPub, onPubSelect, userLocation, focu
   useEffect(() => {
     if (!mapContainerRef.current || mapRef.current) return;
 
+    // Rotation enabled via leaflet-rotate. `rotate: true` activates the
+     // gestures, `rotateControl` adds a compass button (top-left by default).
     const map = L.map(mapContainerRef.current, {
       center: LONDON_CENTER,
       zoom: DEFAULT_ZOOM,
       zoomControl: true,
       attributionControl: true,
+      // @ts-expect-error — leaflet-rotate adds these options at runtime
+      rotate: true,
+      bearing: 0,
+      touchRotate: true,
+      shiftKeyRotate: true,
+      rotateControl: { position: "bottomleft", closeOnZeroBearing: true },
     });
 
     L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {

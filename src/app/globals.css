@@ -163,6 +163,28 @@ body {
   color: var(--accent) !important;
 }
 
+/* Rotate compass control (leaflet-rotate plugin) */
+.leaflet-control-rotate {
+  border: none !important;
+  border-radius: 999px !important;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+  background: var(--bg-raised) !important;
+}
+
+.leaflet-control-rotate a,
+.leaflet-control-rotate-toggle {
+  background: var(--bg-raised) !important;
+  color: var(--text-primary) !important;
+  border-radius: 999px !important;
+  width: 36px !important;
+  height: 36px !important;
+}
+
+.leaflet-control-rotate a:hover {
+  background: var(--bg-tint) !important;
+}
+
 /* ─── Cluster markers ─── */
 .custom-cluster-icon {
   background: transparent !important;

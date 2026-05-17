@@ -34,6 +34,11 @@ export interface Pub {
   sunSource?: string;
   heroImageUrl?: string;
   sunStats?: SunStats;
+  // When this pub gets sun (computed from PITS slot data)
+  sunPattern?: "morning" | "midday" | "afternoon" | "all-day";
+  peakSunHour?: number; // decimal hour, e.g. 14.5 = 2:30pm
+  sunStartHour?: number;
+  sunEndHour?: number;
 }
 
 export interface SunStats {
@@ -56,6 +61,7 @@ export interface Filters {
   hasQuizNight: boolean | null;
   hasLiveMusic: boolean | null;
   isSunny: boolean | null;
+  isTimeOutPick: boolean | null;
   searchQuery: string;
 }
 

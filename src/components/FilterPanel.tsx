@@ -18,6 +18,7 @@ interface FilterPanelProps {
 
 const FILTER_CHIPS: { key: keyof Omit<Filters, "searchQuery">; label: string }[] = [
   { key: "isSunny", label: "☀ Sunny" },
+  { key: "isTimeOutPick", label: "★ Time Out" },
   { key: "hasFood", label: "Food" },
   { key: "hasLiveSport", label: "Sport" },
   { key: "hasBeerGarden", label: "Garden" },
@@ -60,6 +61,7 @@ export default function FilterPanel({
       hasQuizNight: null,
       hasLiveMusic: null,
       isSunny: null,
+      isTimeOutPick: null,
       searchQuery: "",
     });
   }

@@ -43,6 +43,7 @@ export async function GET(request: NextRequest) {
   const hasQuizNight = searchParams.get("hasQuizNight");
   const hasLiveMusic = searchParams.get("hasLiveMusic");
   const isSunny = searchParams.get("isSunny");
+  const isTimeOutPick = searchParams.get("isTimeOutPick");
   const search = searchParams.get("search")?.toLowerCase();
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
@@ -71,6 +72,10 @@ export async function GET(request: NextRequest) {
   if (isSunny === "true")
     filtered = filtered.filter(
       (p) => (p.avgSunPercentage ?? 0) >= SUNNY_THRESHOLD
+    );
+  if (isTimeOutPick === "true")
+    filtered = filtered.filter((p) =>
+      p.recognitions?.some((r) => r.source === "Time Out")
     );
 
   if (search) {

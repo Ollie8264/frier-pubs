@@ -43,4 +43,5 @@ export const FILTER_COLORS: Record<string, { bg: string; fg: string }> = {
   hasQuizNight: { bg: "var(--color-quiz-bg)", fg: "var(--color-quiz)" },
   hasLiveMusic: { bg: "var(--color-music-bg)", fg: "var(--color-music)" },
   isSunny: { bg: "var(--color-sun-bg)", fg: "var(--color-sun)" },
+  isTimeOutPick: { bg: "var(--accent-tint)", fg: "var(--accent)" },
 };

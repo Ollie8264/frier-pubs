@@ -5,6 +5,7 @@ import { Pub } from "@/lib/types";
 import { isOpenNow } from "@/lib/opening-hours";
 import { getAmenityChips } from "@/lib/amenity-colors";
 import SunChart from "@/components/SunChart";
+import PickButton from "@/components/PickButton";
 
 interface PubDetailProps {
   pub: Pub;
@@ -18,6 +19,30 @@ interface PubDetailProps {
 // Cache full pub details across opens so reselecting the same pub is instant.
 // Keyed by `${pubId}|${day ?? "today"}` so different dates have their own cache.
 const detailCache = new Map<string, Pub>();
+
+function patternLabel(p: NonNullable<Pub["sunPattern"]>): string {
+  switch (p) {
+    case "morning": return "Morning sun";
+    case "midday": return "Midday sun";
+    case "afternoon": return "Afternoon sun";
+    case "all-day": return "Sun all day";
+  }
+}
+
+function formatHour(h: number): string {
+  const hh = Math.floor(h);
+  const mm = Math.round((h - hh) * 60);
+  // 24-hour to am/pm format
+  const period = hh >= 12 ? "pm" : "am";
+  const display = hh === 0 ? 12 : hh > 12 ? hh - 12 : hh;
+  if (mm < 5) return `${display}${period}`;
+  if (mm > 55) return `${(display % 12) + 1}${period}`;
+  // Round to nearest 15 mins for clean display
+  const rounded = Math.round(mm / 15) * 15;
+  if (rounded === 0) return `${display}${period}`;
+  if (rounded === 60) return `${(display % 12) + 1}${period}`;
+  return `${display}:${String(rounded).padStart(2, "0")}${period}`;
+}
 
 function cacheKey(pubId: string, day?: number): string {
   return `${pubId}|${day ?? "today"}`;
@@ -132,14 +157,18 @@ export default function PubDetail({ pub: summaryPub, onClose, day, selectedDate 
               </p>
             )}
           </div>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 rounded-full bg-[var(--bg-elevated)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tint)] transition-all cursor-pointer shrink-0 border border-[var(--border)] shadow-sm"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-1 shrink-0">
+            <PickButton pubId={pub.id} size="large" />
+            <button
+              onClick={onClose}
+              aria-label="Close pub details"
+              className="w-8 h-8 rounded-full bg-[var(--bg-elevated)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tint)] transition-all cursor-pointer border border-[var(--border)] shadow-sm"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Badges row */}
@@ -261,6 +290,25 @@ export default function PubDetail({ pub: summaryPub, onClose, day, selectedDate 
                 <strong className="text-[var(--text-primary)]">{pub.sunStats.yearAvg}%</strong>
               </span>
             </div>
+
+            {/* When the sun hits — clock-time hint */}
+            {pub.sunPattern && pub.sunStartHour !== undefined && pub.sunEndHour !== undefined && (
+              <div className="mt-3 flex items-center gap-2 bg-[var(--color-sun-bg)]/40 border border-[var(--color-sun)]/30 rounded-lg px-2.5 py-2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-sun)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41" />
+                </svg>
+                <span className="text-[12px] text-[var(--text-primary)]">
+                  {patternLabel(pub.sunPattern)} — sun{" "}
+                  <strong>{formatHour(pub.sunStartHour)}</strong>
+                  {" to "}
+                  <strong>{formatHour(pub.sunEndHour)}</strong>
+                  {pub.peakSunHour !== undefined && (
+                    <>, peak <strong>{formatHour(pub.peakSunHour)}</strong></>
+                  )}
+                </span>
+              </div>
+            )}
           </div>
         )}
 

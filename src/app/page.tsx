@@ -10,7 +10,8 @@ import { Pub, Filters, SortOption } from "@/lib/types";
 
 const FILTER_KEYS = [
   "hasFood", "hasLiveSport", "hasPoolTable", "hasDarts", "hasBeerGarden",
-  "hasDogFriendly", "hasRealAle", "hasQuizNight", "hasLiveMusic", "isSunny",
+  "hasDogFriendly", "hasRealAle", "hasQuizNight", "hasLiveMusic",
+  "isSunny", "isTimeOutPick",
 ] as const;
 
 interface PersistedState {
@@ -29,7 +30,8 @@ function readUrlState(): PersistedState | null {
   const filters: Filters = {
     hasFood: null, hasLiveSport: null, hasPoolTable: null, hasDarts: null,
     hasBeerGarden: null, hasDogFriendly: null, hasRealAle: null,
-    hasQuizNight: null, hasLiveMusic: null, isSunny: null, searchQuery: "",
+    hasQuizNight: null, hasLiveMusic: null, isSunny: null,
+    isTimeOutPick: null, searchQuery: "",
   };
   for (const k of FILTER_KEYS) {
     if (params.get(k) === "1") filters[k] = true;
@@ -93,6 +95,13 @@ import PubDetail from "@/components/PubDetail";
 import AreaSearch from "@/components/AreaSearch";
 import SkeletonList from "@/components/SkeletonList";
 import SunDatePicker from "@/components/SunDatePicker";
+import MyPicksMenu from "@/components/MyPicksMenu";
+import {
+  parseMatesParam,
+  getMyPicks,
+  allPickedIds,
+  type MateList,
+} from "@/lib/mate-picks";
 
 const Map = lazy(() => import("@/components/Map"));
 
@@ -117,6 +126,10 @@ export default function Home() {
   const [sortBy, setSortBy] = useState<SortOption>("distance");
   // Selected date for sun planning (YYYY-MM-DD). null = today.
   const [sunDate, setSunDate] = useState<string | null>(null);
+  // "Pubs my mates rate" state
+  const [mates, setMates] = useState<MateList[]>([]);
+  const [showMyPicks, setShowMyPicks] = useState(false);
+  const [myPicksVersion, setMyPicksVersion] = useState(0);
   const [filters, setFilters] = useState<Filters>({
     hasFood: null,
     hasLiveSport: null,
@@ -128,6 +141,7 @@ export default function Home() {
     hasQuizNight: null,
     hasLiveMusic: null,
     isSunny: null,
+    isTimeOutPick: null,
     searchQuery: "",
   });
   const [hydrated, setHydrated] = useState(false);
@@ -142,7 +156,18 @@ export default function Home() {
       setPendingPubId(s.selectedPubId);
       setSunDate(s.sunDate);
     }
+    // Parse mate share URLs (?mates=Alice:id1,id2|Bob:id3,id4)
+    const params = new URLSearchParams(window.location.search);
+    const matesList = parseMatesParam(params.get("mates"));
+    setMates(matesList);
     setHydrated(true);
+
+    // Listen for changes to my picks so filtering updates instantly
+    function handler() {
+      setMyPicksVersion((v) => v + 1);
+    }
+    window.addEventListener("frier-picks-changed", handler);
+    return () => window.removeEventListener("frier-picks-changed", handler);
   }, []);
 
   // Sync state to URL whenever it changes (but not before initial hydration)
@@ -203,6 +228,7 @@ export default function Home() {
         if (debouncedFilters.hasQuizNight) params.set("hasQuizNight", "true");
         if (debouncedFilters.hasLiveMusic) params.set("hasLiveMusic", "true");
         if (debouncedFilters.isSunny) params.set("isSunny", "true");
+        if (debouncedFilters.isTimeOutPick) params.set("isTimeOutPick", "true");
         if (sunDay) params.set("day", String(sunDay));
         if (debouncedFilters.searchQuery)
           params.set("search", debouncedFilters.searchQuery);
@@ -227,10 +253,23 @@ export default function Home() {
     loadPubs();
   }, [debouncedFilters, radiusAnchor, sunDay]);
 
-  // Sort: distance (needs anchor), rating, or name
+  // Sort + filter by picks
   const sortAnchor = focusedArea || userLocation;
+  // Picks filter is active when:
+  // - user toggled "show only mine" OR
+  // - mates URL param is present (auto-filter to mate picks)
+  const picksFilterActive = showMyPicks || mates.length > 0;
+
   const sortedPubs = useCallback(() => {
-    const arr = [...pubs];
+    let arr = [...pubs];
+
+    // Apply picks filter (client-side because picks are user-local)
+    if (picksFilterActive) {
+      const allowed = allPickedIds(mates, showMyPicks || mates.length === 0);
+      arr = arr.filter((p) => allowed.has(p.id));
+    }
+    void myPicksVersion; // re-run when my picks change
+
     if (sortBy === "rating") {
       arr.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
     } else if (sortBy === "name") {
@@ -249,7 +288,7 @@ export default function Home() {
       }
     }
     return arr;
-  }, [pubs, sortAnchor, sortBy])();
+  }, [pubs, sortAnchor, sortBy, picksFilterActive, mates, showMyPicks, myPicksVersion])();
 
   const handlePubSelect = useCallback((pub: Pub | null) => {
     setSelectedPub(pub);
@@ -387,6 +426,10 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <MyPicksMenu
+              showMyPicks={showMyPicks}
+              onToggleShowMyPicks={setShowMyPicks}
+            />
             <button
               onClick={handleLocateMe}
               disabled={locating}
@@ -466,6 +509,44 @@ export default function Home() {
 
             {/* Scrollable list */}
             <div id="pub-list" className="flex-1 overflow-y-auto p-2.5 sm:p-3 space-y-2">
+              {/* Mate-list banner */}
+              {mates.length > 0 && (
+                <div className="bg-[var(--accent-tint)] border border-[var(--accent-tint-strong)] rounded-xl px-3 py-2.5 flex items-start gap-2.5">
+                  <svg
+                    className="text-[var(--accent)] mt-0.5 shrink-0"
+                    width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
+                  >
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  </svg>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[12px] text-[var(--text-primary)] font-medium leading-tight">
+                      Showing pubs rated by{" "}
+                      {mates.map((m, i) => (
+                        <span key={m.name}>
+                          {i > 0 && (i === mates.length - 1 ? " and " : ", ")}
+                          <strong>{m.name}</strong>
+                        </span>
+                      ))}
+                    </p>
+                    <p className="text-[11px] text-[var(--text-secondary)] mt-0.5">
+                      {mates.reduce((sum, m) => sum + m.pubIds.length, 0)} pubs
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setMates([]);
+                      // Strip ?mates= from the URL
+                      const url = new URL(window.location.href);
+                      url.searchParams.delete("mates");
+                      window.history.replaceState(null, "", url.toString());
+                    }}
+                    className="text-[11px] text-[var(--accent)] hover:text-[var(--accent-hover)] font-medium cursor-pointer shrink-0"
+                  >
+                    Clear
+                  </button>
+                </div>
+              )}
+
               {selectedPub && (
                 <div id="pub-detail-panel">
                   <PubDetail
@@ -495,7 +576,8 @@ export default function Home() {
                   !!debouncedFilters.hasRealAle ||
                   !!debouncedFilters.hasQuizNight ||
                   !!debouncedFilters.hasLiveMusic ||
-                  !!debouncedFilters.isSunny
+                  !!debouncedFilters.isSunny ||
+                  !!debouncedFilters.isTimeOutPick
                 }
                 radiusContext={
                   radiusAnchor
@@ -509,6 +591,7 @@ export default function Home() {
                       }
                     : null
                 }
+                mates={mates}
               />
               )}
             </div>
