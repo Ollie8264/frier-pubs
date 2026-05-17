@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import pubs from "@/data/pubs.json";
 import { Pub, SUNNY_THRESHOLD } from "@/lib/types";
+import { injectSunMany } from "@/lib/sun";
 
 // Fields excluded from list response to keep payload small.
 // Full detail is fetched on-demand via /api/pubs/[id].
@@ -40,8 +41,16 @@ export async function GET(request: NextRequest) {
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
   const radius = searchParams.get("radius");
+  const dayParam = searchParams.get("day");
+  const day = dayParam ? Math.max(1, Math.min(365, parseInt(dayParam, 10))) : undefined;
 
-  let filtered = pubs as Pub[];
+  // Make a shallow copy of each pub so we don't mutate the imported JSON
+  // (Next.js can cache the import between requests on the same instance)
+  let filtered = (pubs as Pub[]).map((p) => ({ ...p }));
+
+  // Inject today's (or requested day's) sun values BEFORE the sunny filter,
+  // so filtering uses up-to-date numbers rather than the stale Jan baseline.
+  injectSunMany(filtered, day);
 
   if (hasFood === "true") filtered = filtered.filter((p) => p.hasFood);
   if (hasLiveSport === "true") filtered = filtered.filter((p) => p.hasLiveSport);

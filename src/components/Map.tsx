@@ -49,11 +49,24 @@ function formatPopupContent(pub: Pub): string {
   if (pub.hasRealAle) tags.push("Ale");
   if (pub.hasDogFriendly) tags.push("Dogs");
 
+  // Headline row: rating + sun
+  const headlineParts: string[] = [];
+  if (pub.rating) {
+    headlineParts.push(`<span style="color:#c79a2e">★ ${pub.rating}</span>`);
+  }
+  if (pub.avgSunPercentage !== undefined && pub.avgSunPercentage >= 30) {
+    headlineParts.push(`<span style="color:#d99b1e">☀ ${pub.avgSunPercentage}%</span>`);
+  }
+
   return `
     <div class="pub-popup">
       <h3>${pub.name}</h3>
       ${pub.address ? `<div class="pub-address">${pub.address}</div>` : ""}
-      ${pub.rating ? `<div style="font-size:12px;color:#ffd666;margin-bottom:4px">${pub.rating}/5</div>` : ""}
+      ${
+        headlineParts.length > 0
+          ? `<div style="font-size:12px;font-weight:600;margin-bottom:6px;display:flex;gap:8px">${headlineParts.join("")}</div>`
+          : ""
+      }
       ${
         tags.length > 0
           ? `<div class="pub-tags">${tags.map((t) => `<span class="pub-tag">${t}</span>`).join("")}</div>`

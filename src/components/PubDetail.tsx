@@ -4,40 +4,52 @@ import { useEffect, useState } from "react";
 import { Pub } from "@/lib/types";
 import { isOpenNow } from "@/lib/opening-hours";
 import { getAmenityChips } from "@/lib/amenity-colors";
+import SunChart from "@/components/SunChart";
 
 interface PubDetailProps {
   pub: Pub;
   onClose: () => void;
+  /** Day-of-year for sun lookup (1..365). undefined = today. */
+  day?: number;
 }
 
-// Cache full pub details across opens so reselecting the same pub is instant
+// Cache full pub details across opens so reselecting the same pub is instant.
+// Keyed by `${pubId}|${day ?? "today"}` so different dates have their own cache.
 const detailCache = new Map<string, Pub>();
 
-export default function PubDetail({ pub: summaryPub, onClose }: PubDetailProps) {
+function cacheKey(pubId: string, day?: number): string {
+  return `${pubId}|${day ?? "today"}`;
+}
+
+export default function PubDetail({ pub: summaryPub, onClose, day }: PubDetailProps) {
+  const key = cacheKey(summaryPub.id, day);
   // Start with the summary data the list already has, merge in full data on fetch
   const [pub, setPub] = useState<Pub>(
-    () => detailCache.get(summaryPub.id) ?? summaryPub
+    () => detailCache.get(key) ?? summaryPub
   );
   const [loadingDetails, setLoadingDetails] = useState(
-    !detailCache.has(summaryPub.id)
+    !detailCache.has(key)
   );
 
   useEffect(() => {
-    // Reset to summary whenever the selected pub changes
-    setPub(detailCache.get(summaryPub.id) ?? summaryPub);
+    const k = cacheKey(summaryPub.id, day);
+    setPub(detailCache.get(k) ?? summaryPub);
 
-    if (detailCache.has(summaryPub.id)) {
+    if (detailCache.has(k)) {
       setLoadingDetails(false);
       return;
     }
 
     setLoadingDetails(true);
     const controller = new AbortController();
-    fetch(`/api/pubs/${summaryPub.id}`, { signal: controller.signal })
+    const url = day
+      ? `/api/pubs/${summaryPub.id}?day=${day}`
+      : `/api/pubs/${summaryPub.id}`;
+    fetch(url, { signal: controller.signal })
       .then((r) => (r.ok ? r.json() : null))
       .then((full: Pub | null) => {
         if (full) {
-          detailCache.set(summaryPub.id, full);
+          detailCache.set(k, full);
           setPub(full);
         }
       })
@@ -47,7 +59,7 @@ export default function PubDetail({ pub: summaryPub, onClose }: PubDetailProps) 
       .finally(() => setLoadingDetails(false));
 
     return () => controller.abort();
-  }, [summaryPub]);
+  }, [summaryPub, day]);
 
   const openStatus = isOpenNow(pub.openingHours);
   const chips = getAmenityChips(pub);
@@ -212,6 +224,37 @@ export default function PubDetail({ pub: summaryPub, onClose }: PubDetailProps) 
                 Read on Wikipedia →
               </a>
             )}
+          </div>
+        )}
+
+        {/* Sun exposure year breakdown */}
+        {pub.sunStats && (
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                Sun across the year
+              </p>
+              {pub.avgSunPercentage !== undefined && (
+                <span className="text-[11px] font-semibold text-[var(--color-sun)]">
+                  ☀ {pub.avgSunPercentage}% today
+                </span>
+              )}
+            </div>
+            <SunChart
+              stats={pub.sunStats}
+              currentMonth={new Date().getMonth()}
+            />
+            <div className="flex items-center justify-between mt-2 text-[11px] text-[var(--text-muted)]">
+              <span>
+                Best in{" "}
+                <strong className="text-[var(--text-primary)]">{pub.sunStats.bestMonth.name}</strong>{" "}
+                ({pub.sunStats.bestMonth.avg}%)
+              </span>
+              <span>
+                Year avg{" "}
+                <strong className="text-[var(--text-primary)]">{pub.sunStats.yearAvg}%</strong>
+              </span>
+            </div>
           </div>
         )}
 

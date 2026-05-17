@@ -2,6 +2,7 @@
 
 import { Filters, SortOption } from "@/lib/types";
 import { FILTER_COLORS } from "@/lib/amenity-colors";
+import SunDatePicker from "@/components/SunDatePicker";
 
 interface FilterPanelProps {
   filters: Filters;
@@ -11,6 +12,8 @@ interface FilterPanelProps {
   sortBy: SortOption;
   onSortChange: (s: SortOption) => void;
   hasSortAnchor: boolean;
+  sunDate: string | null;
+  onSunDateChange: (date: string | null) => void;
 }
 
 const FILTER_CHIPS: { key: keyof Omit<Filters, "searchQuery">; label: string }[] = [
@@ -34,6 +37,8 @@ export default function FilterPanel({
   sortBy,
   onSortChange,
   hasSortAnchor,
+  sunDate,
+  onSunDateChange,
 }: FilterPanelProps) {
   function toggleFilter(key: keyof Omit<Filters, "searchQuery">) {
     const current = filters[key];
@@ -132,9 +137,11 @@ export default function FilterPanel({
           pubs
         </span>
         <div className="flex items-center gap-2 shrink-0">
+          {/* Sun date picker (shows ☀ + date) */}
+          <SunDatePicker value={sunDate} onChange={onSunDateChange} />
+
           {/* Sort dropdown */}
           <label className="text-[11px] text-[var(--text-muted)] flex items-center gap-1">
-            <span className="hidden sm:inline">Sort:</span>
             <select
               value={sortBy}
               onChange={(e) => onSortChange(e.target.value as SortOption)}
@@ -142,7 +149,7 @@ export default function FilterPanel({
               className="text-[11px] font-medium text-[var(--text-primary)] bg-[var(--bg-elevated)] border border-[var(--border)] rounded-md px-1.5 py-0.5 cursor-pointer focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent-tint)]"
             >
               <option value="distance" disabled={!hasSortAnchor}>
-                Distance{hasSortAnchor ? "" : " (set location first)"}
+                Distance{hasSortAnchor ? "" : " (set location)"}
               </option>
               <option value="rating">Top rated</option>
               <option value="name">Name</option>

@@ -18,6 +18,7 @@ interface PersistedState {
   sortBy: SortOption;
   focusedArea: { lat: number; lng: number; label: string } | null;
   selectedPubId: string | null;
+  sunDate: string | null;
 }
 
 function readUrlState(): PersistedState | null {
@@ -54,6 +55,7 @@ function readUrlState(): PersistedState | null {
     sortBy,
     focusedArea,
     selectedPubId: params.get("pub"),
+    sunDate: params.get("date"),
   };
 }
 
@@ -62,6 +64,7 @@ function writeUrlState(state: {
   sortBy: SortOption;
   focusedArea: PersistedState["focusedArea"];
   selectedPubId: string | null;
+  sunDate: string | null;
 }) {
   if (typeof window === "undefined") return;
   const params = new URLSearchParams();
@@ -76,6 +79,7 @@ function writeUrlState(state: {
     params.set("place", state.focusedArea.label);
   }
   if (state.selectedPubId) params.set("pub", state.selectedPubId);
+  if (state.sunDate) params.set("date", state.sunDate);
 
   const queryString = params.toString();
   const newUrl = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
@@ -88,6 +92,7 @@ import PubList from "@/components/PubList";
 import PubDetail from "@/components/PubDetail";
 import AreaSearch from "@/components/AreaSearch";
 import SkeletonList from "@/components/SkeletonList";
+import SunDatePicker from "@/components/SunDatePicker";
 
 const Map = lazy(() => import("@/components/Map"));
 
@@ -110,6 +115,8 @@ export default function Home() {
     label: string;
   } | null>(null);
   const [sortBy, setSortBy] = useState<SortOption>("distance");
+  // Selected date for sun planning (YYYY-MM-DD). null = today.
+  const [sunDate, setSunDate] = useState<string | null>(null);
   const [filters, setFilters] = useState<Filters>({
     hasFood: null,
     hasLiveSport: null,
@@ -133,6 +140,7 @@ export default function Home() {
       setSortBy(s.sortBy);
       setFocusedArea(s.focusedArea);
       setPendingPubId(s.selectedPubId);
+      setSunDate(s.sunDate);
     }
     setHydrated(true);
   }, []);
@@ -145,8 +153,9 @@ export default function Home() {
       sortBy,
       focusedArea,
       selectedPubId: selectedPub?.id ?? null,
+      sunDate,
     });
-  }, [hydrated, filters, sortBy, focusedArea, selectedPub]);
+  }, [hydrated, filters, sortBy, focusedArea, selectedPub, sunDate]);
 
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(null);
   const [debouncedFilters, setDebouncedFilters] = useState(filters);
@@ -171,6 +180,15 @@ export default function Home() {
   const RADIUS_KM = 1.5;
   const radiusAnchor = focusedArea || userLocation;
 
+  // Convert sunDate (YYYY-MM-DD) → day-of-year 1..365 for API
+  const sunDay = (() => {
+    if (!sunDate) return undefined;
+    const [y, m, d] = sunDate.split("-").map(Number);
+    const date = new Date(Date.UTC(y, m - 1, d));
+    const startOfYear = new Date(Date.UTC(y, 0, 0));
+    return Math.floor((date.getTime() - startOfYear.getTime()) / 86400000);
+  })();
+
   useEffect(() => {
     async function loadPubs() {
       try {
@@ -185,6 +203,7 @@ export default function Home() {
         if (debouncedFilters.hasQuizNight) params.set("hasQuizNight", "true");
         if (debouncedFilters.hasLiveMusic) params.set("hasLiveMusic", "true");
         if (debouncedFilters.isSunny) params.set("isSunny", "true");
+        if (sunDay) params.set("day", String(sunDay));
         if (debouncedFilters.searchQuery)
           params.set("search", debouncedFilters.searchQuery);
 
@@ -206,7 +225,7 @@ export default function Home() {
       }
     }
     loadPubs();
-  }, [debouncedFilters, radiusAnchor]);
+  }, [debouncedFilters, radiusAnchor, sunDay]);
 
   // Sort: distance (needs anchor), rating, or name
   const sortAnchor = focusedArea || userLocation;
@@ -440,6 +459,8 @@ export default function Home() {
                 sortBy={sortBy}
                 onSortChange={setSortBy}
                 hasSortAnchor={!!sortAnchor}
+                sunDate={sunDate}
+                onSunDateChange={setSunDate}
               />
             </div>
 
@@ -450,6 +471,7 @@ export default function Home() {
                   <PubDetail
                     pub={selectedPub}
                     onClose={() => setSelectedPub(null)}
+                    day={sunDay}
                   />
                 </div>
               )}

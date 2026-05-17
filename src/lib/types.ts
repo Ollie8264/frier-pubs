@@ -33,6 +33,14 @@ export interface Pub {
   bestSunPercentage?: number;
   sunSource?: string;
   heroImageUrl?: string;
+  sunStats?: SunStats;
+}
+
+export interface SunStats {
+  yearAvg: number;
+  bestMonth: { name: string; avg: number };
+  worstMonth: { name: string; avg: number };
+  monthly: number[]; // 12 entries, Jan→Dec
 }
 
 export type SortOption = "distance" | "rating" | "name";
