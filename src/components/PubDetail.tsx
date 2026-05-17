@@ -82,6 +82,29 @@ export default function PubDetail({ pub: summaryPub, onClose }: PubDetailProps) 
 
   return (
     <div className="animate-fade-up bg-[var(--bg-elevated)] border border-[var(--accent-tint-strong)] rounded-2xl overflow-hidden shadow-lg">
+      {/* Hero image (if available — sourced from pubsinthesun.com) */}
+      {pub.heroImageUrl && (
+        <div className="relative w-full h-44 bg-[var(--bg-tint)] overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={pub.heroImageUrl}
+            alt={`${pub.name} exterior`}
+            className="w-full h-full object-cover"
+            loading="lazy"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = "none";
+            }}
+          />
+          {/* Sun badge overlay if rated */}
+          {pub.avgSunPercentage !== undefined && (
+            <div className="absolute top-2 right-2 bg-[var(--color-sun-bg)] text-[var(--color-sun)] text-[11px] font-bold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+              <span>☀</span>
+              <span>{pub.avgSunPercentage}% sun</span>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Header band */}
       <div className="bg-gradient-to-br from-[var(--accent-tint)] to-[var(--bg-elevated)] px-5 pt-4 pb-3 border-b border-[var(--border)]">
         <div className="flex items-start justify-between gap-3">
@@ -246,8 +269,8 @@ export default function PubDetail({ pub: summaryPub, onClose }: PubDetailProps) 
         )}
       </div>
 
-      {/* Report incorrect info */}
-      <div className="px-5 pb-2">
+      {/* Footer: report incorrect info + sun data credit */}
+      <div className="px-5 pb-2 flex items-center justify-between gap-2 flex-wrap">
         <a
           href={`mailto:ollie@frier.london?subject=${encodeURIComponent(
             `Pub info correction: ${pub.name}`
@@ -258,6 +281,16 @@ export default function PubDetail({ pub: summaryPub, onClose }: PubDetailProps) 
         >
           Report incorrect info
         </a>
+        {pub.sunSource && (
+          <a
+            href="https://www.pubsinthesun.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] text-[var(--text-muted)] hover:text-[var(--accent)] hover:underline"
+          >
+            Sun data: pubsinthesun.com
+          </a>
+        )}
       </div>
 
       {/* Actions */}

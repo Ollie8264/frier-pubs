@@ -1,4 +1,4 @@
-import { Pub } from "@/lib/types";
+import { Pub, SUNNY_THRESHOLD } from "@/lib/types";
 
 export interface AmenityChip {
   key: string;
@@ -9,6 +9,15 @@ export interface AmenityChip {
 
 export function getAmenityChips(pub: Pub): AmenityChip[] {
   const chips: AmenityChip[] = [];
+  // Show sun chip first if pub is rated sunny (lead with the unique signal)
+  if ((pub.avgSunPercentage ?? 0) >= SUNNY_THRESHOLD) {
+    chips.push({
+      key: "sun",
+      label: `☀ ${pub.avgSunPercentage}%`,
+      bg: "var(--color-sun-bg)",
+      fg: "var(--color-sun)",
+    });
+  }
   if (pub.hasFood) chips.push({ key: "food", label: "Food", bg: "var(--color-food-bg)", fg: "var(--color-food)" });
   if (pub.hasLiveSport) chips.push({ key: "sport", label: "Sport", bg: "var(--color-sport-bg)", fg: "var(--color-sport)" });
   if (pub.hasBeerGarden || pub.hasOutdoorSeating) chips.push({ key: "garden", label: "Garden", bg: "var(--color-garden-bg)", fg: "var(--color-garden)" });
@@ -33,4 +42,5 @@ export const FILTER_COLORS: Record<string, { bg: string; fg: string }> = {
   hasDarts: { bg: "var(--color-darts-bg)", fg: "var(--color-darts)" },
   hasQuizNight: { bg: "var(--color-quiz-bg)", fg: "var(--color-quiz)" },
   hasLiveMusic: { bg: "var(--color-music-bg)", fg: "var(--color-music)" },
+  isSunny: { bg: "var(--color-sun-bg)", fg: "var(--color-sun)" },
 };

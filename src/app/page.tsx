@@ -10,7 +10,7 @@ import { Pub, Filters, SortOption } from "@/lib/types";
 
 const FILTER_KEYS = [
   "hasFood", "hasLiveSport", "hasPoolTable", "hasDarts", "hasBeerGarden",
-  "hasDogFriendly", "hasRealAle", "hasQuizNight", "hasLiveMusic",
+  "hasDogFriendly", "hasRealAle", "hasQuizNight", "hasLiveMusic", "isSunny",
 ] as const;
 
 interface PersistedState {
@@ -28,7 +28,7 @@ function readUrlState(): PersistedState | null {
   const filters: Filters = {
     hasFood: null, hasLiveSport: null, hasPoolTable: null, hasDarts: null,
     hasBeerGarden: null, hasDogFriendly: null, hasRealAle: null,
-    hasQuizNight: null, hasLiveMusic: null, searchQuery: "",
+    hasQuizNight: null, hasLiveMusic: null, isSunny: null, searchQuery: "",
   };
   for (const k of FILTER_KEYS) {
     if (params.get(k) === "1") filters[k] = true;
@@ -120,6 +120,7 @@ export default function Home() {
     hasRealAle: null,
     hasQuizNight: null,
     hasLiveMusic: null,
+    isSunny: null,
     searchQuery: "",
   });
   const [hydrated, setHydrated] = useState(false);
@@ -183,6 +184,7 @@ export default function Home() {
         if (debouncedFilters.hasRealAle) params.set("hasRealAle", "true");
         if (debouncedFilters.hasQuizNight) params.set("hasQuizNight", "true");
         if (debouncedFilters.hasLiveMusic) params.set("hasLiveMusic", "true");
+        if (debouncedFilters.isSunny) params.set("isSunny", "true");
         if (debouncedFilters.searchQuery)
           params.set("search", debouncedFilters.searchQuery);
 
@@ -469,7 +471,8 @@ export default function Home() {
                   !!debouncedFilters.hasDogFriendly ||
                   !!debouncedFilters.hasRealAle ||
                   !!debouncedFilters.hasQuizNight ||
-                  !!debouncedFilters.hasLiveMusic
+                  !!debouncedFilters.hasLiveMusic ||
+                  !!debouncedFilters.isSunny
                 }
                 radiusContext={
                   radiusAnchor

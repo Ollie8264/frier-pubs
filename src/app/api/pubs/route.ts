@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import pubs from "@/data/pubs.json";
-import type { Pub } from "@/lib/types";
+import { Pub, SUNNY_THRESHOLD } from "@/lib/types";
 
 // Fields excluded from list response to keep payload small.
 // Full detail is fetched on-demand via /api/pubs/[id].
@@ -35,6 +35,7 @@ export async function GET(request: NextRequest) {
   const hasRealAle = searchParams.get("hasRealAle");
   const hasQuizNight = searchParams.get("hasQuizNight");
   const hasLiveMusic = searchParams.get("hasLiveMusic");
+  const isSunny = searchParams.get("isSunny");
   const search = searchParams.get("search")?.toLowerCase();
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
@@ -52,6 +53,10 @@ export async function GET(request: NextRequest) {
   if (hasRealAle === "true") filtered = filtered.filter((p) => p.hasRealAle);
   if (hasQuizNight === "true") filtered = filtered.filter((p) => p.hasQuizNight);
   if (hasLiveMusic === "true") filtered = filtered.filter((p) => p.hasLiveMusic);
+  if (isSunny === "true")
+    filtered = filtered.filter(
+      (p) => (p.avgSunPercentage ?? 0) >= SUNNY_THRESHOLD
+    );
 
   if (search) {
     filtered = filtered.filter(

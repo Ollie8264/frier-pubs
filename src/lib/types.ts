@@ -27,6 +27,12 @@ export interface Pub {
   yearEstablished?: number;
   recognitions?: { source: string; type?: string; url?: string }[];
   wikipediaUrl?: string;
+  // Sun-exposure rating (% of outdoor area in direct sun on average)
+  // Sourced from pubsinthesun.com — ray-traced data
+  avgSunPercentage?: number;
+  bestSunPercentage?: number;
+  sunSource?: string;
+  heroImageUrl?: string;
 }
 
 export type SortOption = "distance" | "rating" | "name";
@@ -41,5 +47,9 @@ export interface Filters {
   hasRealAle: boolean | null;
   hasQuizNight: boolean | null;
   hasLiveMusic: boolean | null;
+  isSunny: boolean | null;
   searchQuery: string;
 }
+
+// Threshold (avg sun %) for the "Sunny" filter
+export const SUNNY_THRESHOLD = 60;
