@@ -269,8 +269,8 @@ export default function PubDetail({ pub: summaryPub, onClose }: PubDetailProps) 
         )}
       </div>
 
-      {/* Footer: report incorrect info + sun data credit */}
-      <div className="px-5 pb-2 flex items-center justify-between gap-2 flex-wrap">
+      {/* Report incorrect info */}
+      <div className="px-5 pb-2">
         <a
           href={`mailto:ollie@frier.london?subject=${encodeURIComponent(
             `Pub info correction: ${pub.name}`
@@ -281,16 +281,6 @@ export default function PubDetail({ pub: summaryPub, onClose }: PubDetailProps) 
         >
           Report incorrect info
         </a>
-        {pub.sunSource && (
-          <a
-            href="https://www.pubsinthesun.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[10px] text-[var(--text-muted)] hover:text-[var(--accent)] hover:underline"
-          >
-            Sun data: pubsinthesun.com
-          </a>
-        )}
       </div>
 
       {/* Actions */}
