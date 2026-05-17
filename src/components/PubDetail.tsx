@@ -33,18 +33,17 @@ function patternLabel(p: NonNullable<Pub["sunPattern"]>): string {
 }
 
 function formatHour(h: number): string {
-  const hh = Math.floor(h);
-  const mm = Math.round((h - hh) * 60);
-  // 24-hour to am/pm format
+  // Round to nearest 5 minutes for clean display
+  const totalMins = Math.round((h * 60) / 5) * 5;
+  let hh = Math.floor(totalMins / 60);
+  const mm = totalMins % 60;
+  // Wrap past midnight cleanly
+  if (hh >= 24) hh -= 24;
+
   const period = hh >= 12 ? "pm" : "am";
   const display = hh === 0 ? 12 : hh > 12 ? hh - 12 : hh;
-  if (mm < 5) return `${display}${period}`;
-  if (mm > 55) return `${(display % 12) + 1}${period}`;
-  // Round to nearest 15 mins for clean display
-  const rounded = Math.round(mm / 15) * 15;
-  if (rounded === 0) return `${display}${period}`;
-  if (rounded === 60) return `${(display % 12) + 1}${period}`;
-  return `${display}:${String(rounded).padStart(2, "0")}${period}`;
+  if (mm === 0) return `${display}${period}`;
+  return `${display}:${String(mm).padStart(2, "0")}${period}`;
 }
 
 function cacheKey(pubId: string, day?: number): string {
