@@ -7,6 +7,8 @@
 - ~~Error boundary~~
 - ~~Loading skeletons~~
 - ~~Sitemap + robots.txt~~
+- ~~Year-long sun data~~ — every pub now shows today's actual sun rating; date picker lets you plan ahead; year-chart shows seasonal pattern
+- ~~Monthly auto-refresh GitHub Action~~ — re-runs website validator, FHRS, and sun fetch on the first Sunday of each month
 - ~~Supabase schema + seed script~~ (scaffolded — needs API keys to run)
 
 ## 🟡 Needs your input
@@ -19,7 +21,7 @@
    - anon key → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - service_role key → `SUPABASE_SERVICE_ROLE_KEY`
 4. Add them to `.env.local`
-5. Run `npx tsx scripts/seed-supabase.ts` to push all 2,470 pubs
+5. Run `npm run data:seed-supabase` to push all 2,470 pubs
 6. Also add the public-facing two to Vercel:
    `npx vercel env add NEXT_PUBLIC_SUPABASE_URL production`
    `npx vercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY production`
@@ -35,8 +37,7 @@
 - Easiest: Vercel dashboard → frier-pubs → Analytics → Enable
 - Or: sign up for plausible.io (~£9/mo, GDPR-friendly, no cookies)
 
-## 🚀 Future improvements (when you want)
-- Re-validate websites monthly via Vercel Cron
+## 🚀 Future improvements
 - Add per-pub URLs (`/pubs/[id]`) for SEO + sharing
 - Generate sitemap entries per pub once URLs exist
 - Move filtering server-side once data is in Supabase (faster on mobile)
@@ -44,15 +45,18 @@
 ## 🎁 Wish-list features
 - Save favourites (localStorage → Supabase auth)
 - Visited check-off list
-- Pub photos (Wikipedia commons / user-uploaded to Supabase storage)
 - Walking distance/time (free OSRM routing)
-- Cuisine filter (data already in OSM, just needs filter wired up)
+- Cuisine filter (data already in OSM)
 - Crowd-sourced quiz/event times
 - Dark mode toggle
 - "Pubs my mates rate" social layer
+- "Top sunny pubs near you" featured section
+- "Sunniest weekend coming up" — auto-compute next 4 weekends per pub
+- Photos on pub cards (we have 625 hero photos but only show in detail to save bandwidth)
 
 ## ⚠️ Cost watch
 - Google Places API: **DISABLED**. £70 sunk cost, no further spend possible.
-- Supabase free tier: 500MB DB, 5GB bandwidth, 50K monthly active users. Should be fine.
-- Vercel Hobby: 100GB bandwidth/mo. Should be fine.
-- Nominatim: free, no key, fair-use limits — we comply.
+- Supabase free tier: 500MB DB, 5GB bandwidth, 50K MAU. Fine for our scale.
+- Vercel Hobby: 100GB bandwidth/mo. Fine.
+- Nominatim + PITS + OSM + Wikipedia + Time Out + FHRS: all free, no keys.
+- GitHub Actions: 2,000 free min/mo on private repos, unlimited on public. The monthly refresh uses ~30 min/run.
