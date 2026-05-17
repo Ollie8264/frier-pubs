@@ -12,15 +12,21 @@ const HEAVY_FIELDS = [
   "listedStatus",
   "hygieneRating",
   "phone",
+  "heroImageUrl", // hero photos only render in detail panel, not on cards
+  "sunStats",     // year-round sun stats only used in detail chart
 ] as const;
 
 type PubSummary = Omit<Pub, typeof HEAVY_FIELDS[number]>;
 
 function toSummary(p: Pub): PubSummary {
   // Build a shallow copy with the heavy fields stripped
-  const { description, wikipediaUrl, yearEstablished, listedStatus, hygieneRating, phone, ...rest } = p;
+  const {
+    description, wikipediaUrl, yearEstablished, listedStatus,
+    hygieneRating, phone, heroImageUrl, sunStats, ...rest
+  } = p;
   void description; void wikipediaUrl; void yearEstablished;
   void listedStatus; void hygieneRating; void phone;
+  void heroImageUrl; void sunStats;
   return rest;
 }
 

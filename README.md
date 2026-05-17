@@ -23,6 +23,7 @@ All data is collected and cached locally — the live app makes no paid API call
 - **Wikipedia** — historical descriptions for ~115 famous pubs
 - **Time Out London** — editorial picks ("Best pub", "Best beer garden", etc.)
 - **OSM brand/operator tags** — chain detection for Greene King, Fuller's, Young's, etc.
+- **pubsinthesun.com** — ray-traced sun-exposure data for every day of the year, plus hero photos (629 pubs)
 
 ## Local dev
 
@@ -60,6 +61,11 @@ All scripts live in `scripts/`. Run with `npx tsx scripts/<name>.ts`.
 
 ### Google Places enrichment (paid — disabled by default)
 - `enrich-pubs.ts` `enrich-sport.ts` `enrich-sparse.ts` `enrich-final.ts` `enrich-poor-pubs.ts` `audit-boroughs.ts`
+
+### Sun data (pubsinthesun.com)
+- `enrich-sun.ts` — single-day snapshot (legacy)
+- `enrich-sun-year.ts` — all 365 days, writes `src/data/sun-by-day.json`
+- `restore-osm-websites.ts` — restore website fields from OSM after over-aggressive validation
 
 ### Maintenance
 - `cleanup-data.ts` — remove bad names, dedupe, drop closed pubs

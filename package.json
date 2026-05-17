@@ -6,7 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "enrich:fhrs": "tsx scripts/enrich-fhrs.ts",
+    "enrich:wikipedia": "tsx scripts/enrich-wikipedia.ts",
+    "enrich:timeout": "tsx scripts/enrich-timeout.ts",
+    "enrich:chains": "tsx scripts/enrich-chains.ts",
+    "enrich:osm-extra": "tsx scripts/enrich-osm-extra.ts",
+    "enrich:sun-year": "tsx scripts/enrich-sun-year.ts",
+    "validate:websites": "tsx scripts/validate-websites.ts",
+    "data:cleanup": "tsx scripts/cleanup-data.ts",
+    "data:seed-supabase": "tsx scripts/seed-supabase.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.4",
