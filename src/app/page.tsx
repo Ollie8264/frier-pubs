@@ -384,7 +384,7 @@ export default function Home() {
   }
 
   return (
-    <div className="h-full flex flex-col bg-[var(--bg)]">
+    <div className="h-full flex flex-col bg-[var(--bg)] overflow-hidden">
       {/* Skip link for keyboard users — invisible until Tab-focused */}
       <a
         href="#pub-list"
@@ -554,6 +554,7 @@ export default function Home() {
                     onClose={() => setSelectedPub(null)}
                     day={sunDay}
                     selectedDate={sunDate}
+                    walkFrom={userLocation && !focusedArea ? userLocation : focusedArea}
                   />
                 </div>
               )}
@@ -592,6 +593,7 @@ export default function Home() {
                     : null
                 }
                 mates={mates}
+                walkFrom={userLocation && !focusedArea ? userLocation : focusedArea}
               />
               )}
             </div>

@@ -5,6 +5,7 @@ import { injectSunMany } from "@/lib/sun";
 
 // Fields excluded from list response to keep payload small.
 // Full detail is fetched on-demand via /api/pubs/[id].
+// heroImageUrl is INCLUDED so cards can show a thumbnail.
 const HEAVY_FIELDS = [
   "description",
   "wikipediaUrl",
@@ -12,8 +13,7 @@ const HEAVY_FIELDS = [
   "listedStatus",
   "hygieneRating",
   "phone",
-  "heroImageUrl", // hero photos only render in detail panel, not on cards
-  "sunStats",     // year-round sun stats only used in detail chart
+  "sunStats", // year-round sun stats only used in detail chart
 ] as const;
 
 type PubSummary = Omit<Pub, typeof HEAVY_FIELDS[number]>;
@@ -22,11 +22,11 @@ function toSummary(p: Pub): PubSummary {
   // Build a shallow copy with the heavy fields stripped
   const {
     description, wikipediaUrl, yearEstablished, listedStatus,
-    hygieneRating, phone, heroImageUrl, sunStats, ...rest
+    hygieneRating, phone, sunStats, ...rest
   } = p;
   void description; void wikipediaUrl; void yearEstablished;
   void listedStatus; void hygieneRating; void phone;
-  void heroImageUrl; void sunStats;
+  void sunStats;
   return rest;
 }
 

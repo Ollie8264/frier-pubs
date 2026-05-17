@@ -6,6 +6,7 @@ import { isOpenNow } from "@/lib/opening-hours";
 import { getAmenityChips } from "@/lib/amenity-colors";
 import SunChart from "@/components/SunChart";
 import PickButton from "@/components/PickButton";
+import { walkingMinutes, walkingKm, formatWalkingTime, formatWalkingDistance } from "@/lib/walking";
 
 interface PubDetailProps {
   pub: Pub;
@@ -14,6 +15,8 @@ interface PubDetailProps {
   day?: number;
   /** ISO date being planned (YYYY-MM-DD). Used to highlight the month in chart. */
   selectedDate?: string | null;
+  /** Anchor for walking time display (user location or focused area). */
+  walkFrom?: { lat: number; lng: number } | null;
 }
 
 // Cache full pub details across opens so reselecting the same pub is instant.
@@ -48,7 +51,7 @@ function cacheKey(pubId: string, day?: number): string {
   return `${pubId}|${day ?? "today"}`;
 }
 
-export default function PubDetail({ pub: summaryPub, onClose, day, selectedDate }: PubDetailProps) {
+export default function PubDetail({ pub: summaryPub, onClose, day, selectedDate, walkFrom }: PubDetailProps) {
   const key = cacheKey(summaryPub.id, day);
   // Start with the summary data the list already has, merge in full data on fetch
   const [pub, setPub] = useState<Pub>(
@@ -212,6 +215,18 @@ export default function PubDetail({ pub: summaryPub, onClose, day, selectedDate 
               Est. {pub.yearEstablished}
             </span>
           )}
+          {walkFrom && (
+            <span
+              className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-[var(--accent-tint)] text-[var(--accent)] flex items-center gap-1"
+              title={`${formatWalkingDistance(walkingKm(walkFrom.lat, walkFrom.lng, pub.lat, pub.lng))} away`}
+            >
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="13" cy="4" r="2" />
+                <path d="M15 21l-3-9-5 3 4-9 7 8" />
+              </svg>
+              {formatWalkingTime(walkingMinutes(walkFrom.lat, walkFrom.lng, pub.lat, pub.lng))}
+            </span>
+          )}
         </div>
 
         {/* Editorial recognitions */}
@@ -366,8 +381,16 @@ export default function PubDetail({ pub: summaryPub, onClose, day, selectedDate 
         )}
       </div>
 
-      {/* Report incorrect info */}
-      <div className="px-5 pb-2">
+      {/* Footer links: share + report */}
+      <div className="px-5 pb-2 flex items-center justify-between gap-2 flex-wrap">
+        <a
+          href={`/pubs/${pub.id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[11px] text-[var(--text-muted)] hover:text-[var(--accent)] hover:underline"
+        >
+          Share this pub →
+        </a>
         <a
           href={`mailto:ollie@frier.london?subject=${encodeURIComponent(
             `Pub info correction: ${pub.name}`

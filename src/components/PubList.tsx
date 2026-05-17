@@ -6,6 +6,7 @@ import { isOpenNow } from "@/lib/opening-hours";
 import { getAmenityChips } from "@/lib/amenity-colors";
 import PickButton from "@/components/PickButton";
 import { whoPickedIt, getMyName, type MateList } from "@/lib/mate-picks";
+import { walkingMinutes, formatWalkingTime } from "@/lib/walking";
 
 const PAGE_SIZE = 50;
 
@@ -21,6 +22,8 @@ interface PubListProps {
     onClear: () => void;
   } | null;
   mates?: MateList[];
+  /** When set, each card shows estimated walking time from this location. */
+  walkFrom?: { lat: number; lng: number } | null;
 }
 
 function PubCard({
@@ -28,15 +31,20 @@ function PubCard({
   isSelected,
   onClick,
   mates,
+  walkFrom,
 }: {
   pub: Pub;
   isSelected: boolean;
   onClick: () => void;
   mates: MateList[];
+  walkFrom: { lat: number; lng: number } | null;
 }) {
   const openStatus = isOpenNow(pub.openingHours);
   const chips = getAmenityChips(pub);
   const matesWhoLikeIt = whoPickedIt(pub.id, mates, getMyName() || "You");
+  const walkMin = walkFrom
+    ? walkingMinutes(walkFrom.lat, walkFrom.lng, pub.lat, pub.lng)
+    : null;
 
   const labelBits = [pub.name];
   if (pub.rating) labelBits.push(`${pub.rating} stars`);
@@ -50,12 +58,40 @@ function PubCard({
       data-pub-card
       aria-label={labelBits.join(", ")}
       aria-pressed={isSelected}
-      className={`w-full text-left p-4 rounded-2xl transition-all cursor-pointer group ${
+      className={`w-full text-left rounded-2xl transition-all cursor-pointer group overflow-hidden ${
         isSelected
           ? "bg-[var(--accent-tint)] ring-2 ring-[var(--accent)]/40 shadow-md"
           : "bg-[var(--bg-elevated)] hover:bg-[var(--bg-raised)] border border-[var(--border)] hover:border-[var(--border-strong)] shadow-sm hover:shadow-md"
       }`}
     >
+      <div className="flex gap-3 p-3 sm:p-3.5">
+        {/* Thumbnail */}
+        {pub.heroImageUrl ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={pub.heroImageUrl}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg object-cover shrink-0 bg-[var(--bg-tint)]"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = "none";
+            }}
+          />
+        ) : (
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-[var(--bg-tint)] shrink-0 flex items-center justify-center">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.5">
+              <path d="M17 8h1a4 4 0 1 1 0 8h-1" />
+              <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z" />
+              <line x1="6" x2="6" y1="2" y2="4" />
+              <line x1="10" x2="10" y1="2" y2="4" />
+              <line x1="14" x2="14" y1="2" y2="4" />
+            </svg>
+          </div>
+        )}
+
+        {/* Content */}
+        <div className="flex-1 min-w-0">
       {/* Top row: name + rating + heart */}
       <div className="flex items-start justify-between gap-2 mb-1">
         <div className="min-w-0 flex-1">
@@ -120,7 +156,7 @@ function PubCard({
         </div>
       )}
 
-      {/* Address + status */}
+      {/* Address + status + walking time */}
       <div className="flex items-center gap-2 mb-2.5">
         {openStatus !== "unknown" && (
           <span
@@ -131,6 +167,15 @@ function PubCard({
             }`}
           >
             {openStatus === "open" ? "Open" : "Closed"}
+          </span>
+        )}
+        {walkMin !== null && walkMin <= 60 && (
+          <span className="text-[11px] font-semibold text-[var(--accent)] flex items-center gap-0.5 shrink-0">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="13" cy="4" r="2" />
+              <path d="M15 21l-3-9-5 3 4-9 7 8" />
+            </svg>
+            {formatWalkingTime(walkMin)}
           </span>
         )}
         {pub.address && (
@@ -159,6 +204,8 @@ function PubCard({
           )}
         </div>
       )}
+        </div>{/* /content */}
+      </div>{/* /flex */}
     </button>
   );
 }
@@ -238,6 +285,7 @@ export default function PubList({
   hasActiveFilters,
   radiusContext,
   mates = [],
+  walkFrom = null,
 }: PubListProps) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
@@ -284,6 +332,7 @@ export default function PubList({
           isSelected={selectedPub?.id === pub.id}
           onClick={() => onPubSelect(pub)}
           mates={mates}
+          walkFrom={walkFrom}
         />
       ))}
 
