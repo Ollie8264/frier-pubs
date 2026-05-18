@@ -24,5 +24,13 @@ export async function GET(
 
   // Attach year-round sun stats (sunniest month, etc.) for the detail panel
   const sunStats = getSunStatsFor(id);
-  return Response.json({ ...pub, sunStats });
+  return Response.json(
+    { ...pub, sunStats },
+    {
+      headers: {
+        // Individual pub data changes rarely — let CDN cache aggressively.
+        "Cache-Control": "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400",
+      },
+    }
+  );
 }

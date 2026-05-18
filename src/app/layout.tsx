@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Crimson_Pro } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const inter = Inter({
@@ -60,7 +61,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${crimson.variable} h-full`}>
-      <body className="h-full antialiased">{children}</body>
+      <body className="h-full antialiased">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

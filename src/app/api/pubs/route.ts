@@ -104,11 +104,21 @@ export async function GET(request: NextRequest) {
   // Strip heavy fields — list response should be lean
   const summaries = filtered.map(toSummary);
 
-  return Response.json({
-    pubs: summaries,
-    total: pubs.length,
-    filtered: summaries.length,
-  });
+  return Response.json(
+    {
+      pubs: summaries,
+      total: pubs.length,
+      filtered: summaries.length,
+    },
+    {
+      headers: {
+        // Vercel CDN edge caches for 60s, browsers for 30s; stale-while-revalidate
+        // lets the CDN serve a stale response for up to 5min while it fetches fresh.
+        // Massively reduces function invocations under load.
+        "Cache-Control": "public, max-age=30, s-maxage=60, stale-while-revalidate=300",
+      },
+    }
+  );
 }
 
 function haversineDistance(

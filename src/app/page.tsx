@@ -96,6 +96,7 @@ import AreaSearch from "@/components/AreaSearch";
 import SkeletonList from "@/components/SkeletonList";
 import SunDatePicker from "@/components/SunDatePicker";
 import MyPicksMenu from "@/components/MyPicksMenu";
+import WelcomeTip from "@/components/WelcomeTip";
 import {
   parseMatesParam,
   getMyPicks,
@@ -385,6 +386,7 @@ export default function Home() {
 
   return (
     <div className="h-full flex flex-col bg-[var(--bg)] overflow-hidden">
+      <WelcomeTip />
       {/* Skip link for keyboard users — invisible until Tab-focused */}
       <a
         href="#pub-list"
