@@ -419,10 +419,8 @@ export default function Home() {
               className="w-10 h-9 sm:w-14 sm:h-12 shrink-0"
             />
             <div className="min-w-0">
-              <h1 className="font-serif text-[15px] sm:text-[22px] font-semibold text-[var(--text-primary)] tracking-tight leading-tight truncate">
-                {/* Shorter on mobile to avoid header truncation */}
-                <span className="sm:hidden">Frier&rsquo;s Pub Map</span>
-                <span className="hidden sm:inline">Frier&rsquo;s Useful Pub Map</span>
+              <h1 className="font-serif text-[13px] sm:text-[22px] font-semibold text-[var(--text-primary)] tracking-tight leading-[1.1]">
+                Frier&rsquo;s Useful Pub Map
               </h1>
               <p className="text-[10px] sm:text-[11px] text-[var(--text-muted)] tracking-wide uppercase mt-0.5 truncate">
                 {totalCount.toLocaleString()} central London pubs
