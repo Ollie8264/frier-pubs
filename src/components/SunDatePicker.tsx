@@ -6,6 +6,15 @@ interface SunDatePickerProps {
   /** Selected date as YYYY-MM-DD (UTC). null = today. */
   value: string | null;
   onChange: (date: string | null) => void;
+  /** Selected "still sunny after X hour" filter. null = no filter. */
+  sunnyAfter: number | null;
+  onSunnyAfterChange: (hour: number | null) => void;
+}
+
+function formatHourAmPm(h: number): string {
+  if (h === 0 || h === 24) return "midnight";
+  if (h === 12) return "12pm";
+  return h < 12 ? `${h}am` : `${h - 12}pm`;
 }
 
 function todayIso(): string {
@@ -27,11 +36,15 @@ function formatDateShort(iso: string): string {
   return date.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
 }
 
-export default function SunDatePicker({ value, onChange }: SunDatePickerProps) {
+export default function SunDatePicker({
+  value, onChange, sunnyAfter, onSunnyAfterChange,
+}: SunDatePickerProps) {
   const [open, setOpen] = useState(false);
   const today = todayIso();
   const selected = value ?? today;
   const isToday = selected === today;
+  const hasTimeFilter = sunnyAfter !== null;
+  const hasAnyChange = !isToday || hasTimeFilter;
 
   // Quick presets for common planning dates
   const presets = (() => {
@@ -55,11 +68,11 @@ export default function SunDatePicker({ value, onChange }: SunDatePickerProps) {
       <button
         onClick={() => setOpen((o) => !o)}
         className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium border transition-all cursor-pointer ${
-          isToday
-            ? "bg-[var(--bg-elevated)] text-[var(--text-secondary)] border-[var(--border)] hover:border-[var(--border-strong)]"
-            : "bg-[var(--color-sun-bg)] text-[var(--color-sun)] border-[var(--color-sun)]/30"
+          hasAnyChange
+            ? "bg-[var(--color-sun-bg)] text-[var(--color-sun)] border-[var(--color-sun)]/30"
+            : "bg-[var(--bg-elevated)] text-[var(--text-secondary)] border-[var(--border)] hover:border-[var(--border-strong)]"
         }`}
-        aria-label="Plan sun for a different day"
+        aria-label="Plan sun for a different day or time"
       >
         <svg
           width="12" height="12" viewBox="0 0 24 24" fill="none"
@@ -70,7 +83,10 @@ export default function SunDatePicker({ value, onChange }: SunDatePickerProps) {
           <line x1="8" y1="2" x2="8" y2="6" />
           <line x1="3" y1="10" x2="21" y2="10" />
         </svg>
-        <span>☀ {formatDateShort(selected)}</span>
+        <span>
+          ☀ {formatDateShort(selected)}
+          {hasTimeFilter && `, after ${formatHourAmPm(sunnyAfter!)}`}
+        </span>
       </button>
 
       {open && (
@@ -112,20 +128,53 @@ export default function SunDatePicker({ value, onChange }: SunDatePickerProps) {
                 max={`${new Date().getFullYear()}-12-31`}
                 onChange={(e) => {
                   onChange(e.target.value === today ? null : e.target.value);
-                  setOpen(false);
                 }}
                 className="w-full text-[12px] bg-[var(--bg-tint)] border border-[var(--border)] rounded-md px-2 py-1.5 text-[var(--text-primary)] focus:outline-none focus:border-[var(--accent)]"
               />
             </div>
-            {!isToday && (
+
+            {/* "Still sunny after..." time picker */}
+            <div className="px-3 py-2 border-t border-[var(--border)]">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)] mb-1.5">
+                Still sunny after…
+              </p>
+              <div className="flex flex-wrap gap-1">
+                <button
+                  onClick={() => onSunnyAfterChange(null)}
+                  className={`text-[11px] px-2 py-1 rounded-md font-medium cursor-pointer transition-colors ${
+                    !hasTimeFilter
+                      ? "bg-[var(--color-sun-bg)] text-[var(--color-sun)]"
+                      : "bg-[var(--bg-tint)] text-[var(--text-secondary)] hover:bg-[var(--accent-tint)]"
+                  }`}
+                >
+                  Any
+                </button>
+                {[12, 13, 14, 15, 16, 17, 18, 19, 20].map((h) => (
+                  <button
+                    key={h}
+                    onClick={() => onSunnyAfterChange(h === sunnyAfter ? null : h)}
+                    className={`text-[11px] px-2 py-1 rounded-md font-medium cursor-pointer transition-colors ${
+                      sunnyAfter === h
+                        ? "bg-[var(--color-sun-bg)] text-[var(--color-sun)]"
+                        : "bg-[var(--bg-tint)] text-[var(--text-secondary)] hover:bg-[var(--accent-tint)]"
+                    }`}
+                  >
+                    {formatHourAmPm(h)}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {hasAnyChange && (
               <button
                 onClick={() => {
                   onChange(null);
+                  onSunnyAfterChange(null);
                   setOpen(false);
                 }}
                 className="w-full text-[11px] py-2 text-[var(--accent)] hover:bg-[var(--accent-tint)] border-t border-[var(--border)] cursor-pointer font-medium"
               >
-                Back to today
+                Reset sun planner
               </button>
             )}
           </div>

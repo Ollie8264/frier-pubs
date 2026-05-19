@@ -24,6 +24,16 @@ interface PubListProps {
   mates?: MateList[];
   /** When set, each card shows estimated walking time from this location. */
   walkFrom?: { lat: number; lng: number } | null;
+  /** When set, cards show 'X hours sun remaining' from this hour. */
+  sunnyAfter?: number | null;
+}
+
+function formatHoursOfSun(hours: number): string {
+  if (hours < 0.5) return "<30m";
+  if (hours < 1) return "~30m";
+  const rounded = Math.round(hours * 2) / 2; // nearest 30 min
+  if (rounded % 1 === 0) return `${rounded}h`;
+  return `${Math.floor(rounded)}h 30m`;
 }
 
 function PubCard({
@@ -32,12 +42,14 @@ function PubCard({
   onClick,
   mates,
   walkFrom,
+  sunnyAfter,
 }: {
   pub: Pub;
   isSelected: boolean;
   onClick: () => void;
   mates: MateList[];
   walkFrom: { lat: number; lng: number } | null;
+  sunnyAfter: number | null;
 }) {
   const openStatus = isOpenNow(pub.openingHours);
   const chips = getAmenityChips(pub);
@@ -45,6 +57,19 @@ function PubCard({
   const walkMin = walkFrom
     ? walkingMinutes(walkFrom.lat, walkFrom.lng, pub.lat, pub.lng)
     : null;
+
+  // Compute hours of sun remaining from `sunnyAfter` time, if filter active.
+  // Uses the pub's sunStartHour/sunEndHour (computed from PITS slot data).
+  let hoursOfSunLeft: number | null = null;
+  if (
+    sunnyAfter !== null &&
+    pub.sunStartHour !== undefined &&
+    pub.sunEndHour !== undefined &&
+    pub.sunEndHour > sunnyAfter
+  ) {
+    const start = Math.max(sunnyAfter, pub.sunStartHour);
+    hoursOfSunLeft = pub.sunEndHour - start;
+  }
 
   const labelBits = [pub.name];
   if (pub.rating) labelBits.push(`${pub.rating} stars`);
@@ -178,6 +203,14 @@ function PubCard({
             {formatWalkingTime(walkMin)}
           </span>
         )}
+        {hoursOfSunLeft !== null && (
+          <span
+            className="text-[11px] font-semibold text-[var(--color-sun)] flex items-center gap-0.5 shrink-0"
+            title={`Sun lasts ~${formatHoursOfSun(hoursOfSunLeft)} from this time`}
+          >
+            ☀ {formatHoursOfSun(hoursOfSunLeft)}
+          </span>
+        )}
         {pub.address && (
           <p className="text-[12px] text-[var(--text-muted)] truncate">
             {pub.address}
@@ -286,6 +319,7 @@ export default function PubList({
   radiusContext,
   mates = [],
   walkFrom = null,
+  sunnyAfter = null,
 }: PubListProps) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
@@ -333,6 +367,7 @@ export default function PubList({
           onClick={() => onPubSelect(pub)}
           mates={mates}
           walkFrom={walkFrom}
+          sunnyAfter={sunnyAfter}
         />
       ))}
 

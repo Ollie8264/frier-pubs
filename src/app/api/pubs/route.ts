@@ -44,6 +44,8 @@ export async function GET(request: NextRequest) {
   const hasLiveMusic = searchParams.get("hasLiveMusic");
   const isSunny = searchParams.get("isSunny");
   const isTimeOutPick = searchParams.get("isTimeOutPick");
+  const sunnyAfterParam = searchParams.get("sunnyAfter");
+  const sunnyAfter = sunnyAfterParam ? parseFloat(sunnyAfterParam) : null;
   const search = searchParams.get("search")?.toLowerCase();
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
@@ -77,6 +79,11 @@ export async function GET(request: NextRequest) {
     filtered = filtered.filter((p) =>
       p.recognitions?.some((r) => r.source === "Time Out")
     );
+  if (sunnyAfter !== null && !Number.isNaN(sunnyAfter)) {
+    filtered = filtered.filter(
+      (p) => p.sunEndHour !== undefined && p.sunEndHour > sunnyAfter
+    );
+  }
 
   if (search) {
     filtered = filtered.filter(

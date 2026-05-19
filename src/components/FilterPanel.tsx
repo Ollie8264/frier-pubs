@@ -62,11 +62,15 @@ export default function FilterPanel({
       hasLiveMusic: null,
       isSunny: null,
       isTimeOutPick: null,
+      sunnyAfter: null,
       searchQuery: "",
     });
   }
 
-  const hasActiveFilters = FILTER_CHIPS.some((c) => filters[c.key]) || filters.searchQuery;
+  const hasActiveFilters =
+    FILTER_CHIPS.some((c) => filters[c.key]) ||
+    filters.searchQuery ||
+    filters.sunnyAfter !== null;
 
   return (
     <div className="space-y-3">
@@ -139,8 +143,13 @@ export default function FilterPanel({
           pubs
         </span>
         <div className="flex items-center gap-2 shrink-0">
-          {/* Sun date picker (shows ☀ + date) */}
-          <SunDatePicker value={sunDate} onChange={onSunDateChange} />
+          {/* Sun date picker (shows ☀ + date + time) */}
+          <SunDatePicker
+            value={sunDate}
+            onChange={onSunDateChange}
+            sunnyAfter={filters.sunnyAfter}
+            onSunnyAfterChange={(h) => onFiltersChange({ ...filters, sunnyAfter: h })}
+          />
 
           {/* Sort dropdown */}
           <label className="text-[11px] text-[var(--text-muted)] flex items-center gap-1">

@@ -62,6 +62,8 @@ export interface Filters {
   hasLiveMusic: boolean | null;
   isSunny: boolean | null;
   isTimeOutPick: boolean | null;
+  /** Only show pubs where the sun is still hitting them at or after this hour (0-24). */
+  sunnyAfter: number | null;
   searchQuery: string;
 }
 
