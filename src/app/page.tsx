@@ -18,7 +18,7 @@ const EMPTY_FILTERS: Filters = {
   hasFood: null, hasLiveSport: null, hasPoolTable: null, hasDarts: null,
   hasBeerGarden: null, hasDogFriendly: null, hasRealAle: null,
   hasQuizNight: null, hasLiveMusic: null, isSunny: null,
-  isTimeOutPick: null, sunnyAfter: null, searchQuery: "",
+  isTimeOutPick: null, sunnyAfter: null, openAfter: null, searchQuery: "",
 };
 
 interface PersistedState {
@@ -42,6 +42,11 @@ function readUrlState(): PersistedState | null {
   if (sunnyAfterRaw) {
     const n = parseFloat(sunnyAfterRaw);
     if (!Number.isNaN(n) && n >= 0 && n <= 24) filters.sunnyAfter = n;
+  }
+  const openAfterRaw = params.get("openAfter");
+  if (openAfterRaw) {
+    const n = parseFloat(openAfterRaw);
+    if (!Number.isNaN(n) && n >= 0 && n <= 30) filters.openAfter = n;
   }
   filters.searchQuery = params.get("q") ?? "";
 
@@ -84,6 +89,9 @@ function writeUrlState(state: {
   if (state.filters.sunnyAfter !== null && state.filters.sunnyAfter !== undefined) {
     params.set("sunnyAfter", String(state.filters.sunnyAfter));
   }
+  if (state.filters.openAfter !== null && state.filters.openAfter !== undefined) {
+    params.set("openAfter", String(state.filters.openAfter));
+  }
   if (state.sortBy && state.sortBy !== "distance") params.set("sort", state.sortBy);
   if (state.focusedArea) {
     params.set("lat", state.focusedArea.lat.toFixed(5));
@@ -113,6 +121,7 @@ import {
   allPickedIds,
   type MateList,
 } from "@/lib/mate-picks";
+import { typicalOpenWindow } from "@/lib/opening-hours";
 
 const Map = lazy(() => import("@/components/Map"));
 
@@ -230,6 +239,9 @@ export default function Home() {
         if (debouncedFilters.sunnyAfter !== null && debouncedFilters.sunnyAfter !== undefined) {
           params.set("sunnyAfter", String(debouncedFilters.sunnyAfter));
         }
+        if (debouncedFilters.openAfter !== null && debouncedFilters.openAfter !== undefined) {
+          params.set("openAfter", String(debouncedFilters.openAfter));
+        }
         if (sunDay) params.set("day", String(sunDay));
         if (debouncedFilters.searchQuery)
           params.set("search", debouncedFilters.searchQuery);
@@ -282,6 +294,16 @@ export default function Home() {
       return arr;
     }
 
+    // When "open after X" is active, sort by latest closing time first
+    if (debouncedFilters.openAfter !== null) {
+      arr.sort((a, b) => {
+        const ac = a.openingHours ? typicalOpenWindow(a.openingHours).close : 0;
+        const bc = b.openingHours ? typicalOpenWindow(b.openingHours).close : 0;
+        return bc - ac;
+      });
+      return arr;
+    }
+
     if (sortBy === "rating") {
       arr.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
     } else if (sortBy === "name") {
@@ -300,7 +322,7 @@ export default function Home() {
       }
     }
     return arr;
-  }, [pubs, sortAnchor, sortBy, picksFilterActive, mates, showMyPicks, myPicksVersion, debouncedFilters.sunnyAfter])();
+  }, [pubs, sortAnchor, sortBy, picksFilterActive, mates, showMyPicks, myPicksVersion, debouncedFilters.sunnyAfter, debouncedFilters.openAfter])();
 
   const handlePubSelect = useCallback((pub: Pub | null) => {
     setSelectedPub(pub);
@@ -592,7 +614,8 @@ export default function Home() {
                   !!debouncedFilters.hasLiveMusic ||
                   !!debouncedFilters.isSunny ||
                   !!debouncedFilters.isTimeOutPick ||
-                  debouncedFilters.sunnyAfter !== null
+                  debouncedFilters.sunnyAfter !== null ||
+                  debouncedFilters.openAfter !== null
                 }
                 radiusContext={
                   radiusAnchor
@@ -609,6 +632,7 @@ export default function Home() {
                 mates={mates}
                 walkFrom={userLocation && !focusedArea ? userLocation : focusedArea}
                 sunnyAfter={debouncedFilters.sunnyAfter}
+                openAfter={debouncedFilters.openAfter}
               />
               )}
             </div>

@@ -7,6 +7,7 @@ import { getAmenityChips } from "@/lib/amenity-colors";
 import PickButton from "@/components/PickButton";
 import { whoPickedIt, getMyName, type MateList } from "@/lib/mate-picks";
 import { walkingMinutes, formatWalkingTime } from "@/lib/walking";
+import { typicalOpenWindow } from "@/lib/opening-hours";
 
 const PAGE_SIZE = 50;
 
@@ -26,6 +27,8 @@ interface PubListProps {
   walkFrom?: { lat: number; lng: number } | null;
   /** When set, cards show 'X hours sun remaining' from this hour. */
   sunnyAfter?: number | null;
+  /** When set, cards show 'Open until …' badge. */
+  openAfter?: number | null;
 }
 
 function formatHoursOfSun(hours: number): string {
@@ -36,6 +39,22 @@ function formatHoursOfSun(hours: number): string {
   return `${Math.floor(rounded)}h 30m`;
 }
 
+function formatCloseHour(h: number): string {
+  // Wrap past-midnight values back to 0..24
+  let hour = h;
+  while (hour >= 24) hour -= 24;
+  const wholeHour = Math.floor(hour);
+  const mins = Math.round((hour - wholeHour) * 60);
+  const period = wholeHour >= 12 ? "pm" : "am";
+  const display = wholeHour === 0 ? 12 : wholeHour > 12 ? wholeHour - 12 : wholeHour;
+  if (mins === 0) {
+    if (hour === 0) return "midnight";
+    if (hour === 12) return "noon";
+    return `${display}${period}`;
+  }
+  return `${display}:${String(mins).padStart(2, "0")}${period}`;
+}
+
 function PubCard({
   pub,
   isSelected,
@@ -43,6 +62,7 @@ function PubCard({
   mates,
   walkFrom,
   sunnyAfter,
+  openAfter,
 }: {
   pub: Pub;
   isSelected: boolean;
@@ -50,6 +70,7 @@ function PubCard({
   mates: MateList[];
   walkFrom: { lat: number; lng: number } | null;
   sunnyAfter: number | null;
+  openAfter: number | null;
 }) {
   const openStatus = isOpenNow(pub.openingHours);
   const chips = getAmenityChips(pub);
@@ -69,6 +90,13 @@ function PubCard({
   ) {
     const start = Math.max(sunnyAfter, pub.sunStartHour);
     hoursOfSunLeft = pub.sunEndHour - start;
+  }
+
+  // Compute close-time string when open-late filter is active
+  let closeTimeStr: string | null = null;
+  if (openAfter !== null && pub.openingHours) {
+    const { close } = typicalOpenWindow(pub.openingHours);
+    if (close >= openAfter) closeTimeStr = formatCloseHour(close);
   }
 
   const labelBits = [pub.name];
@@ -211,6 +239,14 @@ function PubCard({
             ☀ {formatHoursOfSun(hoursOfSunLeft)}
           </span>
         )}
+        {closeTimeStr && (
+          <span
+            className="text-[11px] font-semibold text-[var(--color-music)] flex items-center gap-0.5 shrink-0"
+            title="Latest closing time"
+          >
+            🌙 {closeTimeStr}
+          </span>
+        )}
         {pub.address && (
           <p className="text-[12px] text-[var(--text-muted)] truncate">
             {pub.address}
@@ -320,6 +356,7 @@ export default function PubList({
   mates = [],
   walkFrom = null,
   sunnyAfter = null,
+  openAfter = null,
 }: PubListProps) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
@@ -368,6 +405,7 @@ export default function PubList({
           mates={mates}
           walkFrom={walkFrom}
           sunnyAfter={sunnyAfter}
+          openAfter={openAfter}
         />
       ))}
 

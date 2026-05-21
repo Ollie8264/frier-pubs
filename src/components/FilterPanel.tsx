@@ -3,6 +3,7 @@
 import { Filters, SortOption } from "@/lib/types";
 import { FILTER_COLORS } from "@/lib/amenity-colors";
 import SunDatePicker from "@/components/SunDatePicker";
+import OpenLatePicker from "@/components/OpenLatePicker";
 
 interface FilterPanelProps {
   filters: Filters;
@@ -63,6 +64,7 @@ export default function FilterPanel({
       isSunny: null,
       isTimeOutPick: null,
       sunnyAfter: null,
+      openAfter: null,
       searchQuery: "",
     });
   }
@@ -70,7 +72,8 @@ export default function FilterPanel({
   const hasActiveFilters =
     FILTER_CHIPS.some((c) => filters[c.key]) ||
     filters.searchQuery ||
-    filters.sunnyAfter !== null;
+    filters.sunnyAfter !== null ||
+    filters.openAfter !== null;
 
   return (
     <div className="space-y-3">
@@ -149,6 +152,12 @@ export default function FilterPanel({
             onChange={onSunDateChange}
             sunnyAfter={filters.sunnyAfter}
             onSunnyAfterChange={(h) => onFiltersChange({ ...filters, sunnyAfter: h })}
+          />
+
+          {/* Open-late picker — for finding pubs open late at night */}
+          <OpenLatePicker
+            value={filters.openAfter}
+            onChange={(h) => onFiltersChange({ ...filters, openAfter: h })}
           />
 
           {/* Sort dropdown */}

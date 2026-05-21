@@ -64,6 +64,8 @@ export interface Filters {
   isTimeOutPick: boolean | null;
   /** Only show pubs where the sun is still hitting them at or after this hour (0-24). */
   sunnyAfter: number | null;
+  /** Only show pubs whose latest closing time is at or after this hour (0-30, where >24 = past midnight). */
+  openAfter: number | null;
   searchQuery: string;
 }
 

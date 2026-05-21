@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import pubs from "@/data/pubs.json";
 import { Pub, SUNNY_THRESHOLD } from "@/lib/types";
 import { injectSunMany } from "@/lib/sun";
+import { typicalOpenWindow } from "@/lib/opening-hours";
 
 // Fields excluded from list response to keep payload small.
 // Full detail is fetched on-demand via /api/pubs/[id].
@@ -46,6 +47,8 @@ export async function GET(request: NextRequest) {
   const isTimeOutPick = searchParams.get("isTimeOutPick");
   const sunnyAfterParam = searchParams.get("sunnyAfter");
   const sunnyAfter = sunnyAfterParam ? parseFloat(sunnyAfterParam) : null;
+  const openAfterParam = searchParams.get("openAfter");
+  const openAfter = openAfterParam ? parseFloat(openAfterParam) : null;
   const search = searchParams.get("search")?.toLowerCase();
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
@@ -83,6 +86,15 @@ export async function GET(request: NextRequest) {
     filtered = filtered.filter(
       (p) => p.sunEndHour !== undefined && p.sunEndHour > sunnyAfter
     );
+  }
+  if (openAfter !== null && !Number.isNaN(openAfter)) {
+    // Only include pubs whose latest closing time is past `openAfter` AND that
+    // actually have opening hours (don't surface unknowns as false positives).
+    filtered = filtered.filter((p) => {
+      if (!p.openingHours) return false;
+      const { close } = typicalOpenWindow(p.openingHours);
+      return close >= openAfter;
+    });
   }
 
   if (search) {
