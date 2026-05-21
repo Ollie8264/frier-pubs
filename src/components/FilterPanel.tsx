@@ -172,6 +172,7 @@ export default function FilterPanel({
                 Distance{hasSortAnchor ? "" : " (set location)"}
               </option>
               <option value="rating">Top rated</option>
+              <option value="latestClose">Latest close</option>
               <option value="name">Name</option>
             </select>
           </label>

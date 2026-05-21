@@ -18,6 +18,8 @@ const PRESETS: { label: string; value: number }[] = [
   { label: "Midnight", value: 24 },
   { label: "1am", value: 25 },
   { label: "2am", value: 26 },
+  { label: "3am", value: 27 },
+  { label: "4am", value: 28 },
 ];
 
 function formatLabel(value: number): string {

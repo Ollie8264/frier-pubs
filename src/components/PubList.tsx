@@ -92,11 +92,18 @@ function PubCard({
     hoursOfSunLeft = pub.sunEndHour - start;
   }
 
-  // Compute close-time string when open-late filter is active
+  // Compute close-time string. Show when:
+  //   - the openAfter filter is active (and pub matches), or
+  //   - the pub stays open at or past midnight (genuinely a late pub —
+  //     worth flagging unprompted because they're the minority).
   let closeTimeStr: string | null = null;
-  if (openAfter !== null && pub.openingHours) {
+  if (pub.openingHours) {
     const { close } = typicalOpenWindow(pub.openingHours);
-    if (close >= openAfter) closeTimeStr = formatCloseHour(close);
+    if (openAfter !== null && close >= openAfter) {
+      closeTimeStr = formatCloseHour(close);
+    } else if (openAfter === null && close >= 24) {
+      closeTimeStr = formatCloseHour(close);
+    }
   }
 
   const labelBits = [pub.name];

@@ -48,7 +48,7 @@ export interface SunStats {
   monthly: number[]; // 12 entries, Jan→Dec
 }
 
-export type SortOption = "distance" | "rating" | "name";
+export type SortOption = "distance" | "rating" | "name" | "latestClose";
 
 export interface Filters {
   hasFood: boolean | null;

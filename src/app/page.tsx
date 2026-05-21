@@ -311,6 +311,12 @@ export default function Home() {
         const stripThe = (s: string) => s.replace(/^The\s+/i, "");
         return stripThe(a.name).localeCompare(stripThe(b.name));
       });
+    } else if (sortBy === "latestClose") {
+      arr.sort((a, b) => {
+        const ac = a.openingHours ? typicalOpenWindow(a.openingHours).close : 0;
+        const bc = b.openingHours ? typicalOpenWindow(b.openingHours).close : 0;
+        return bc - ac;
+      });
     } else {
       // distance (default) — falls back to original order if no anchor
       if (sortAnchor) {
