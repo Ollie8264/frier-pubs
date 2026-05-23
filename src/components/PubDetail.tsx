@@ -11,10 +11,6 @@ import { walkingMinutes, walkingKm, formatWalkingTime, formatWalkingDistance } f
 interface PubDetailProps {
   pub: Pub;
   onClose: () => void;
-  /** Day-of-year for sun lookup (1..365). undefined = today. */
-  day?: number;
-  /** ISO date being planned (YYYY-MM-DD). Used to highlight the month in chart. */
-  selectedDate?: string | null;
   /** Anchor for walking time display (user location or focused area). */
   walkFrom?: { lat: number; lng: number } | null;
 }
@@ -46,39 +42,30 @@ function formatHour(h: number): string {
   return `${display}:${String(mm).padStart(2, "0")}${period}`;
 }
 
-function cacheKey(pubId: string, day?: number): string {
-  return `${pubId}|${day ?? "today"}`;
-}
-
-export default function PubDetail({ pub: summaryPub, onClose, day, selectedDate, walkFrom }: PubDetailProps) {
-  const key = cacheKey(summaryPub.id, day);
+export default function PubDetail({ pub: summaryPub, onClose, walkFrom }: PubDetailProps) {
   // Start with the summary data the list already has, merge in full data on fetch
   const [pub, setPub] = useState<Pub>(
-    () => detailCache.get(key) ?? summaryPub
+    () => detailCache.get(summaryPub.id) ?? summaryPub
   );
   const [loadingDetails, setLoadingDetails] = useState(
-    !detailCache.has(key)
+    !detailCache.has(summaryPub.id)
   );
 
   useEffect(() => {
-    const k = cacheKey(summaryPub.id, day);
-    setPub(detailCache.get(k) ?? summaryPub);
+    setPub(detailCache.get(summaryPub.id) ?? summaryPub);
 
-    if (detailCache.has(k)) {
+    if (detailCache.has(summaryPub.id)) {
       setLoadingDetails(false);
       return;
     }
 
     setLoadingDetails(true);
     const controller = new AbortController();
-    const url = day
-      ? `/api/pubs/${summaryPub.id}?day=${day}`
-      : `/api/pubs/${summaryPub.id}`;
-    fetch(url, { signal: controller.signal })
+    fetch(`/api/pubs/${summaryPub.id}`, { signal: controller.signal })
       .then((r) => (r.ok ? r.json() : null))
       .then((full: Pub | null) => {
         if (full) {
-          detailCache.set(k, full);
+          detailCache.set(summaryPub.id, full);
           setPub(full);
         }
       })
@@ -88,7 +75,7 @@ export default function PubDetail({ pub: summaryPub, onClose, day, selectedDate,
       .finally(() => setLoadingDetails(false));
 
     return () => controller.abort();
-  }, [summaryPub, day]);
+  }, [summaryPub]);
 
   const openStatus = isOpenNow(pub.openingHours);
   const chips = getAmenityChips(pub);
@@ -287,11 +274,7 @@ export default function PubDetail({ pub: summaryPub, onClose, day, selectedDate,
             </div>
             <SunChart
               stats={pub.sunStats}
-              currentMonth={
-                selectedDate
-                  ? parseInt(selectedDate.split("-")[1], 10) - 1
-                  : new Date().getMonth()
-              }
+              currentMonth={new Date().getMonth()}
             />
             <div className="flex items-center justify-between mt-2 text-[11px] text-[var(--text-muted)]">
               <span>

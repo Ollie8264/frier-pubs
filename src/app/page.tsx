@@ -27,7 +27,6 @@ interface PersistedState {
   sortBy: SortOption;
   focusedArea: { lat: number; lng: number; label: string } | null;
   selectedPubId: string | null;
-  sunDate: string | null;
 }
 
 function readUrlState(): PersistedState | null {
@@ -70,7 +69,6 @@ function readUrlState(): PersistedState | null {
     sortBy,
     focusedArea,
     selectedPubId: params.get("pub"),
-    sunDate: params.get("date"),
   };
 }
 
@@ -79,7 +77,6 @@ function writeUrlState(state: {
   sortBy: SortOption;
   focusedArea: PersistedState["focusedArea"];
   selectedPubId: string | null;
-  sunDate: string | null;
 }) {
   if (typeof window === "undefined") return;
   const params = new URLSearchParams();
@@ -100,7 +97,6 @@ function writeUrlState(state: {
     params.set("place", state.focusedArea.label);
   }
   if (state.selectedPubId) params.set("pub", state.selectedPubId);
-  if (state.sunDate) params.set("date", state.sunDate);
 
   const queryString = params.toString();
   const newUrl = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
@@ -113,7 +109,6 @@ import PubList from "@/components/PubList";
 import PubDetail from "@/components/PubDetail";
 import AreaSearch from "@/components/AreaSearch";
 import SkeletonList from "@/components/SkeletonList";
-import SunDatePicker from "@/components/SunDatePicker";
 import MyPicksMenu from "@/components/MyPicksMenu";
 import WelcomeTip from "@/components/WelcomeTip";
 import {
@@ -145,8 +140,6 @@ export default function Home() {
     label: string;
   } | null>(null);
   const [sortBy, setSortBy] = useState<SortOption>("distance");
-  // Selected date for sun planning (YYYY-MM-DD). null = today.
-  const [sunDate, setSunDate] = useState<string | null>(null);
   // "Pubs my mates rate" state
   const [mates, setMates] = useState<MateList[]>([]);
   const [showMyPicks, setShowMyPicks] = useState(false);
@@ -162,7 +155,6 @@ export default function Home() {
       setSortBy(s.sortBy);
       setFocusedArea(s.focusedArea);
       setPendingPubId(s.selectedPubId);
-      setSunDate(s.sunDate);
     }
     // Parse mate share URLs (?mates=Alice:id1,id2|Bob:id3,id4)
     const params = new URLSearchParams(window.location.search);
@@ -186,9 +178,8 @@ export default function Home() {
       sortBy,
       focusedArea,
       selectedPubId: selectedPub?.id ?? null,
-      sunDate,
     });
-  }, [hydrated, filters, sortBy, focusedArea, selectedPub, sunDate]);
+  }, [hydrated, filters, sortBy, focusedArea, selectedPub]);
 
   const debounceRef = useRef<ReturnType<typeof setTimeout>>(null);
   const [debouncedFilters, setDebouncedFilters] = useState(filters);
@@ -213,14 +204,8 @@ export default function Home() {
   const RADIUS_KM = 1.5;
   const radiusAnchor = focusedArea || userLocation;
 
-  // Convert sunDate (YYYY-MM-DD) → day-of-year 1..365 for API
-  const sunDay = (() => {
-    if (!sunDate) return undefined;
-    const [y, m, d] = sunDate.split("-").map(Number);
-    const date = new Date(Date.UTC(y, m - 1, d));
-    const startOfYear = new Date(Date.UTC(y, 0, 0));
-    return Math.floor((date.getTime() - startOfYear.getTime()) / 86400000);
-  })();
+  // Sun data is always for today — the date picker was removed because
+  // patterns shift very little across a week and the date UI added friction.
 
   useEffect(() => {
     async function loadPubs() {
@@ -243,7 +228,6 @@ export default function Home() {
         if (debouncedFilters.openAfter !== null && debouncedFilters.openAfter !== undefined) {
           params.set("openAfter", String(debouncedFilters.openAfter));
         }
-        if (sunDay) params.set("day", String(sunDay));
         if (debouncedFilters.searchQuery)
           params.set("search", debouncedFilters.searchQuery);
 
@@ -265,7 +249,7 @@ export default function Home() {
       }
     }
     loadPubs();
-  }, [debouncedFilters, radiusAnchor, sunDay]);
+  }, [debouncedFilters, radiusAnchor]);
 
   // Sort + filter by picks
   const sortAnchor = focusedArea || userLocation;
@@ -555,8 +539,6 @@ export default function Home() {
                 sortBy={sortBy}
                 onSortChange={setSortBy}
                 hasSortAnchor={!!sortAnchor}
-                sunDate={sunDate}
-                onSunDateChange={setSunDate}
               />
             </div>
 
@@ -605,8 +587,6 @@ export default function Home() {
                   <PubDetail
                     pub={selectedPub}
                     onClose={() => setSelectedPub(null)}
-                    day={sunDay}
-                    selectedDate={sunDate}
                     walkFrom={userLocation && !focusedArea ? userLocation : focusedArea}
                   />
                 </div>

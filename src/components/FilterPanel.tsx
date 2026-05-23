@@ -13,8 +13,6 @@ interface FilterPanelProps {
   sortBy: SortOption;
   onSortChange: (s: SortOption) => void;
   hasSortAnchor: boolean;
-  sunDate: string | null;
-  onSunDateChange: (date: string | null) => void;
 }
 
 const FILTER_CHIPS: { key: keyof Omit<Filters, "searchQuery">; label: string }[] = [
@@ -39,8 +37,6 @@ export default function FilterPanel({
   sortBy,
   onSortChange,
   hasSortAnchor,
-  sunDate,
-  onSunDateChange,
 }: FilterPanelProps) {
   function toggleFilter(key: keyof Omit<Filters, "searchQuery">) {
     const current = filters[key];
@@ -148,8 +144,6 @@ export default function FilterPanel({
         <div className="flex items-center gap-2 shrink-0">
           {/* Sun date picker (shows ☀ + date + time) */}
           <SunDatePicker
-            value={sunDate}
-            onChange={onSunDateChange}
             sunnyAfter={filters.sunnyAfter}
             onSunnyAfterChange={(h) => onFiltersChange({ ...filters, sunnyAfter: h })}
           />
