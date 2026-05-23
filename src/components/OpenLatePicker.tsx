@@ -57,7 +57,7 @@ export default function OpenLatePicker({ value, onChange }: OpenLatePickerProps)
       {open && (
         <>
           <div className="fixed inset-0 z-[800]" onClick={() => setOpen(false)} />
-          <div className="absolute top-full right-0 mt-1 bg-[var(--bg-elevated)] border border-[var(--border)] rounded-xl shadow-xl overflow-hidden z-[900] animate-fade-up min-w-[180px]">
+          <div className="absolute top-full left-0 mt-1 bg-[var(--bg-elevated)] border border-[var(--border)] rounded-xl shadow-xl overflow-hidden z-[900] animate-fade-up min-w-[180px] max-w-[calc(100vw-1.5rem)]">
             <div className="px-3 py-2 border-b border-[var(--border)]">
               <p className="text-[10px] font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                 Still open past…
