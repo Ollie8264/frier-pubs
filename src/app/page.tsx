@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useCallback, useEffect, useRef, lazy, Suspense } from "react";
 import { Pub, Filters, SortOption } from "@/lib/types";
 
@@ -467,6 +468,17 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <Link
+              href="/discover"
+              className="text-[12px] sm:text-[13px] font-medium text-[var(--text-primary)] bg-[var(--bg-elevated)] px-2.5 sm:px-4 py-2 rounded-full hover:bg-[var(--bg-tint)] transition-all border border-[var(--border)] shadow-sm whitespace-nowrap flex items-center gap-1.5"
+              title="Sunny day? Browse neighbourhoods and pub crawls"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+              </svg>
+              <span className="hidden sm:inline">Discover</span>
+            </Link>
             <MyPicksMenu
               showMyPicks={showMyPicks}
               onToggleShowMyPicks={setShowMyPicks}
