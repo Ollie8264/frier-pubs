@@ -113,8 +113,10 @@ export function resolveCrawl(crawl: PubCrawl): ResolvedCrawlStop[] {
   });
 }
 
-/** Hero image for a crawl card — first matched pub with a photo */
+/** Hero image for a crawl card — first matched stop with a photo, then any
+ * highly-rated pub within the crawl area with a photo as fallback. */
 export function crawlHero(crawl: PubCrawl): string | null {
+  // Try named stops first
   for (const stop of crawl.stops) {
     const pub = findPubByName(stop.name, {
       lat: crawl.center.lat,
@@ -123,5 +125,55 @@ export function crawlHero(crawl: PubCrawl): string | null {
     });
     if (pub?.heroImageUrl) return pub.heroImageUrl;
   }
-  return null;
+  // Fallback: any pub in a 1.5km radius of the crawl centre with a photo,
+  // sorted by rating so we pick a decent shot.
+  const radius = 1.5;
+  const nearby = pubs
+    .filter((p) => p.heroImageUrl)
+    .filter((p) => {
+      const dKm = Math.hypot(p.lat - crawl.center.lat, p.lng - crawl.center.lng) * 111;
+      return dKm <= radius;
+    });
+  if (nearby.length === 0) return null;
+  nearby.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+  return nearby[0].heroImageUrl ?? null;
+}
+
+/**
+ * Find extra pubs in the crawl area that aren't already in the stop list.
+ * Used for the 'add nearby pubs to extend your crawl' section.
+ */
+export function nearbyExtraPubs(crawl: PubCrawl, max = 8): Pub[] {
+  // Get all stop pub IDs so we don't recommend them again
+  const stopIds = new Set<string>();
+  for (const stop of crawl.stops) {
+    const pub = findPubByName(stop.name, {
+      lat: crawl.center.lat,
+      lng: crawl.center.lng,
+      radiusKm: 4,
+    });
+    if (pub) stopIds.add(pub.id);
+  }
+
+  // Use a tighter radius than the route map to keep extras genuinely "nearby"
+  const radius = 1.0;
+  const nearby = pubs
+    .filter((p) => !stopIds.has(p.id))
+    .filter((p) => {
+      const dKm = Math.hypot(p.lat - crawl.center.lat, p.lng - crawl.center.lng) * 111;
+      return dKm <= radius;
+    });
+
+  // Sort by rating, with hygiene + photos as tiebreakers (proxy for "decent")
+  nearby.sort((a, b) => {
+    const ra = (a.rating ?? 0) + (a.heroImageUrl ? 0.1 : 0);
+    const rb = (b.rating ?? 0) + (b.heroImageUrl ? 0.1 : 0);
+    return rb - ra;
+  });
+
+  return nearby.slice(0, max).map((p) => {
+    const enriched = { ...p };
+    injectSun(enriched);
+    return enriched;
+  });
 }
