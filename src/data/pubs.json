@@ -1503,7 +1503,8 @@
     "description": "The White Horse is a pub in Parsons Green, Fulham, London, known colloquially by many as \"The Sloaney Pony\", a reference to the \"Sloane Rangers\" who frequent it. It is a popular and busy pub which is featured in many good guides.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_White_Horse,_Fulham",
     "historic": true,
-    "website": "https://www.whitehorsesw6.com/"
+    "website": "https://www.whitehorsesw6.com/",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/White_Horse%2C_Fulham_23.jpg/960px-White_Horse%2C_Fulham_23.jpg"
   },
   {
     "id": "osm-node-7061825385",
@@ -2518,7 +2519,8 @@
     "hygieneRating": 5,
     "description": "The Mason's Arms is a pub on Battersea Park Road, Battersea, London SW8, situated opposite Battersea Park Railway Station. It is a Grade II listed building, built in the mid-19th century. In October 2019 it reopened following a major refurbishment.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Mason%27s_Arms,_Battersea",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/The_Masons_Arms%2C_Battersea_%28geograph_4406747%29.jpg/960px-The_Masons_Arms%2C_Battersea_%28geograph_4406747%29.jpg"
   },
   {
     "id": "osm-node-12961239334",
@@ -4308,7 +4310,8 @@
     "description": "The Spanish Galleon is a public house at 1 College Approach, Greenwich, London, that was built in 1836 as part of Joseph Kay's redevelopment of central Greenwich in the Regency style. It has been grade II listed since 1973 and is managed by the brewers Shepherd Neame.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Spanish_Galleon,_Greenwich",
     "yearEstablished": 1836,
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9e/The_Spanish_Galleon_Tavern_-_geograph.org.uk_-_478333.jpg"
   },
   {
     "id": "osm-way-498824930",
@@ -5126,7 +5129,8 @@
     "yearEstablished": 1837,
     "description": "The Trafalgar Tavern is a Grade II listed public house at the north end of Park Row, Greenwich, London, on the south bank of the River Thames, east of and adjacent to the Old Royal Naval College.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Trafalgar_Tavern",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/The_Trafalgar_Tavern_%284703195270%29.jpg/960px-The_Trafalgar_Tavern_%284703195270%29.jpg"
   },
   {
     "id": "osm-way-299668096",
@@ -5778,7 +5782,8 @@
     "rating": 3.9,
     "description": "The Royal Vauxhall Tavern is a Grade II listed Gay entertainment venue in Vauxhall, London. It is also known as the RVT. It is South London's oldest surviving queer venue.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Royal_Vauxhall_Tavern",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Royal_Vauxhall_Tavern%2C_Vauxhall%2C_SE11_%282866697236%29.jpg/960px-Royal_Vauxhall_Tavern%2C_Vauxhall%2C_SE11_%282866697236%29.jpg"
   },
   {
     "id": "osm-node-300452750",
@@ -7615,7 +7620,8 @@
     "hygieneRating": 5,
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Drayton_Arms,_Earls_Court",
     "historic": true,
-    "website": "https://www.thedraytonarmssw5.co.uk/"
+    "website": "https://www.thedraytonarmssw5.co.uk/",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Drayton_Arms%2C_Earl%27s_Court%2C_SW5.jpg/960px-Drayton_Arms%2C_Earl%27s_Court%2C_SW5.jpg"
   },
   {
     "id": "osm-way-390045367",
@@ -8555,7 +8561,8 @@
     "historic": true,
     "listedStatus": "Grade II",
     "description": "The Prince of Teck is a Grade II listed public house at 161 Earls Court Road, Earls Court, London. It was named after Francis, Duke of Teck, a German nobleman who became connected to the British royal family after marrying Princess Mary Adelaide of Cambridge.",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Prince_of_Teck,_Earl%27s_Court"
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Prince_of_Teck,_Earl%27s_Court",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Prince_of_Teck%2C_Earls_Court_04.JPG/960px-Prince_of_Teck%2C_Earls_Court_04.JPG"
   },
   {
     "id": "gp-51.49286--0.10012",
@@ -13175,7 +13182,8 @@
     "rating": 4.1,
     "description": "The Westminster Arms is a public house in the City of Westminster, Greater London, England. It is located on Storey's Gate, about 0.2 miles (0.32 km) west of the Palace of Westminster and near Westminster Abbey.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Westminster_Arms",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Westminster_Arms%2C_Westminster%2C_SW1_%283388205916%29.jpg/960px-Westminster_Arms%2C_Westminster%2C_SW1_%283388205916%29.jpg"
   },
   {
     "id": "osm-way-100268281",
@@ -13296,7 +13304,11 @@
     "hasRealFire": false,
     "hasWifi": true,
     "rating": 4.4,
-    "website": "https://www.greeneking.co.uk/pubs/greater-london/two-chairmen"
+    "website": "https://www.greeneking.co.uk/pubs/greater-london/two-chairmen",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/ChairmenTwoWestminster.jpg/960px-ChairmenTwoWestminster.jpg",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Two_Chairmen",
+    "description": "The Two Chairmen is thought to be the oldest public house in Westminster. Its pub sign, featuring two men carrying a sedan chair, can be traced back to 1729. The pub is near Birdcage Walk, where James I had aviaries for exotic birds, and close to St James's Park tube station.",
+    "historic": true
   },
   {
     "id": "osm-way-260843129",
@@ -15431,7 +15443,10 @@
     "sunPattern": "morning",
     "peakSunHour": 8.7,
     "sunStartHour": 5,
-    "sunEndHour": 13.7
+    "sunEndHour": 13.7,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Captain_Kidd,_Wapping",
+    "description": "The Captain Kidd is a pub in Wapping, East London, that is named after the seventeenth-century pirate William Kidd, who was executed at the nearby Execution Dock. The pub is a Grade II listed building, and was historically used as a coffee warehouse.",
+    "historic": true
   },
   {
     "id": "osm-way-425809832",
@@ -15456,7 +15471,8 @@
     "rating": 4.5,
     "description": "The Town of Ramsgate public house is located at the centre of the ancient hamlet of Wapping in the London Borough of Tower Hamlets. It features in several books about London inns where it is rated as \"a notable specimen of a waterman's tavern.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Town_of_Ramsgate",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/The_Town_of_Ramsgate%2C_London%2C_Dec_2013.jpg/960px-The_Town_of_Ramsgate%2C_London%2C_Dec_2013.jpg"
   },
   {
     "id": "osm-node-3801496832",
@@ -16406,7 +16422,8 @@
     "hygieneRating": 5,
     "description": "The King's Arms is a pub at 25 Roupell Street, Waterloo, London SE1. It is a Grade II listed building, built in the early-mid 19th century.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/King%27s_Arms,_Waterloo",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Kings_Arms%2C_Waterloo%2C_SE1_%282588424576%29.jpg/960px-Kings_Arms%2C_Waterloo%2C_SE1_%282588424576%29.jpg"
   },
   {
     "id": "osm-way-94069703",
@@ -18210,7 +18227,8 @@
     "listedStatus": "Grade II",
     "description": "The Windsor Castle is a Grade II listed public house at 114 Campden Hill Road near Holland Park, London.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Windsor_Castle,_Kensington",
-    "website": "https://www.thewindsorcastlekensington.co.uk/"
+    "website": "https://www.thewindsorcastlekensington.co.uk/",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Windsor_Castle%2C_Kensington%2C_W8_%2815208278181%29.jpg/960px-Windsor_Castle%2C_Kensington%2C_W8_%2815208278181%29.jpg"
   },
   {
     "id": "osm-node-289996602",
@@ -18360,7 +18378,11 @@
     "hasLiveMusic": false,
     "hasRealFire": true,
     "hasWifi": true,
-    "rating": 4.7
+    "rating": 4.7,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/The_Old_Shades_pub.JPG/960px-The_Old_Shades_pub.JPG",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Old_Shades",
+    "description": "The Old Shades is a Grade II listed public house at 37–39 Whitehall, London SW1. It was built in 1898 by the architects Treadwell and Martin. As of January 2020, it is operated by the Young's pub chain.",
+    "historic": true
   },
   {
     "id": "osm-node-6821298285",
@@ -18683,7 +18705,10 @@
     "sunPattern": "all-day",
     "peakSunHour": 10,
     "sunStartHour": 5,
-    "sunEndHour": 16
+    "sunEndHour": 16,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Churchill_Arms",
+    "description": "The Churchill Arms is a public house at 119 Kensington Church Street on the corner with Campden Street, Notting Hill, London. There has been a pub on the site since 1824 when it opened under the name of the \"Bedford Arms\" but by 1826 it was renamed to \"The Churchill Arms\".",
+    "historic": true
   },
   {
     "id": "osm-way-418075242",
@@ -19153,7 +19178,8 @@
     "description": "The Sherlock Holmes is a Victorian-themed public house in Northumberland Street near Charing Cross railway station and Trafalgar Square which contains a large collection of memorabilia related to the fictional detective Sherlock Holmes.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Sherlock_Holmes",
     "historic": true,
-    "website": "https://www.greeneking-pubs.co.uk/pubs/greater-london/sherlock-holmes/"
+    "website": "https://www.greeneking-pubs.co.uk/pubs/greater-london/sherlock-holmes/",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/10_Northumberland_Street_London.jpg/960px-10_Northumberland_Street_London.jpg"
   },
   {
     "id": "osm-way-205407098",
@@ -20300,7 +20326,10 @@
     "hasWifi": false,
     "rating": 4.4,
     "historic": true,
-    "listedStatus": "Grade II"
+    "listedStatus": "Grade II",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/The_Punch_Bowl_in_Mayfair.jpg/960px-The_Punch_Bowl_in_Mayfair.jpg",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Punch_Bowl,_Mayfair",
+    "description": "The Punch Bowl, at 41 Farm Street, Mayfair, is a public house, dating from circa 1750. It is listed as Grade II by English Heritage."
   },
   {
     "id": "osm-way-765454461",
@@ -20857,7 +20886,10 @@
     "sunPattern": "morning",
     "peakSunHour": 9.6,
     "sunStartHour": 5,
-    "sunEndHour": 14.6
+    "sunEndHour": 14.6,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mount_Street,_London",
+    "description": "Mount Street is an east–west, quite narrow, archetypal street in the Mayfair district of the City of Westminster. fronted by many mid-rise buildings, mostly of a narrow frontage. The sides of two very grand hotels flank part of either end of the street.",
+    "historic": true
   },
   {
     "id": "osm-way-225754347",
@@ -24957,7 +24989,8 @@
     "hygieneRating": 5,
     "description": "The East India Arms is a pub in the City of London. The building is located on Fenchurch Street near the place where the East India Company had its headquarters.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/East_India_Arms",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Eastern_City_of_London_08.03.2013_16-14-33_east_india_arms.jpg/960px-Eastern_City_of_London_08.03.2013_16-14-33_east_india_arms.jpg"
   },
   {
     "id": "osm-node-12349074001",
@@ -25953,7 +25986,10 @@
     "sunPattern": "morning",
     "peakSunHour": 10.6,
     "sunStartHour": 8.2,
-    "sunEndHour": 13
+    "sunEndHour": 13,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_French_House,_Soho",
+    "description": "The French House is a pub and dining room at 49 Dean Street, Soho, London. It was previously known as the York Minster, but was informally called \"the French pub\" or \"the French house\" by its regulars.",
+    "historic": true
   },
   {
     "id": "osm-node-12877542100",
@@ -26042,7 +26078,8 @@
     "wikipediaUrl": "https://en.wikipedia.org/wiki/White_Lion,_Covent_Garden",
     "yearEstablished": 1888,
     "historic": true,
-    "website": "https://www.nicholsonspubs.co.uk/restaurants/london/thewhitelioncoventgardenlondon"
+    "website": "https://www.nicholsonspubs.co.uk/restaurants/london/thewhitelioncoventgardenlondon",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/65/White_Lion%2C_Covent_Garden151.jpg"
   },
   {
     "id": "osm-node-4699715433",
@@ -27444,7 +27481,10 @@
     "sunPattern": "morning",
     "peakSunHour": 11.1,
     "sunStartHour": 8.5,
-    "sunEndHour": 13.2
+    "sunEndHour": 13.2,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Coach_and_Horses,_Soho",
+    "description": "The Coach and Horses at 29 Greek Street on the corner with Romilly Street in Soho, London, is a grade II listed public house.",
+    "historic": true
   },
   {
     "id": "osm-way-485638354",
@@ -27493,7 +27533,10 @@
     "sunPattern": "midday",
     "peakSunHour": 12,
     "sunStartHour": 7.1,
-    "sunEndHour": 13.8
+    "sunEndHour": 13.8,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Snow_(public_house)",
+    "description": "The John Snow, formerly the Newcastle-upon-Tyne, is a public house in Broadwick Street, in the Soho district of the City of Westminster, part of the West End of London, and dates back to the 1870s.",
+    "historic": true
   },
   {
     "id": "google-51.51328--0.14399",
@@ -27681,7 +27724,8 @@
     "description": "The Two Brewers is a pub in Covent Garden, London, at 40 Monmouth Street. Prior to 1935, the pub was known as the Sheep's Head Tavern and features open fires. In 1835, William Spicer, formerly the proprietor of the Tower at Tower street in the Seven Dials became the pub keeper.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Two_Brewers,_Covent_Garden",
     "historic": true,
-    "website": "https://www.greeneking.co.uk/pubs/greater-london/two-brewers"
+    "website": "https://www.greeneking.co.uk/pubs/greater-london/two-brewers",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Two_Brewers%2C_Monmouth_Street%2C_Covent_Garden_03.jpg/960px-Two_Brewers%2C_Monmouth_Street%2C_Covent_Garden_03.jpg"
   },
   {
     "id": "osm-node-13481884401",
@@ -29244,7 +29288,11 @@
     "hasRealFire": false,
     "hasWifi": false,
     "rating": 4.4,
-    "hygieneRating": 5
+    "hygieneRating": 5,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/77/Punch_Tavern%2C_Fleet_Street%2C_EC4_%282492669541%29.jpg",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Punch_Tavern",
+    "description": "The Punch Tavern is a Grade II listed public house at 98–100 Fleet Street, Holborn, London. The pub previously on this site was called the Crown and Sugar Loaf, but was renamed as the Punch Tavern in the 1840s, as Punch magazine had its office nearby at that end of Fleet Street.",
+    "historic": true
   },
   {
     "id": "osm-way-80208385",
@@ -29343,7 +29391,10 @@
     "sunPattern": "morning",
     "peakSunHour": 10.5,
     "sunStartHour": 7.8,
-    "sunEndHour": 13.1
+    "sunEndHour": 13.1,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dog_and_Duck,_Soho",
+    "description": "The Dog and Duck is a Grade II listed public house at 18 Bateman Street, Soho, London W1D 3AJ, built in 1897 by the architect Francis Chambers for Cannon Brewery. It is on the Campaign for Real Ale's National Inventory of Historic Pub Interiors.",
+    "historic": true
   },
   {
     "id": "osm-way-279322556",
@@ -30010,7 +30061,10 @@
     "hygieneRating": 5,
     "rating": 4.4,
     "historic": true,
-    "listedStatus": "Grade II"
+    "listedStatus": "Grade II",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/37/Yeoldcheshirecheese.jpg",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ye_Olde_Cheshire_Cheese",
+    "description": "Ye Olde Cheshire Cheese is a Grade II listed public house at 145 Fleet Street, on Wine Office Court, City of London. Rebuilt shortly after the Great Fire of 1666, the pub is known for its literary associations, with its regular patrons having included Charles Dickens, G. K."
   },
   {
     "id": "osm-way-195649317",
@@ -30037,7 +30091,8 @@
     "rating": 4.5,
     "description": "The George Tavern is a Grade II listed public house and music venue located on Commercial Road in Stepney, London. It is owned and operated by artist Pauline Forster.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/George_Tavern",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e7/The_George_Tavern_-_373_Commercial_Road%2C_London.jpg"
   },
   {
     "id": "osm-node-13808620782",
@@ -32578,7 +32633,11 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "hygieneRating": 5
+    "hygieneRating": 5,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Old_Doctor_Butlers_Head%2C_Bank%2C_EC2_%283830260597%29.jpg/960px-Old_Doctor_Butlers_Head%2C_Bank%2C_EC2_%283830260597%29.jpg",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Old_Doctor_Butler%27s_Head",
+    "description": "Old Doctor Butler's Head is a pub in Mason's Avenue, London EC2. The pub was named after the physician William Butler, a doctor at the court of James I. Butler is credited with inventing the medicinal drink Dr Butler’s purging ale, which became popular in 17th-century England.",
+    "historic": true
   },
   {
     "id": "osm-node-691719964",
@@ -36179,7 +36238,8 @@
     "rating": 4.7,
     "description": "The Ye Olde Mitre is a Grade II listed public house at 1 Ely Court, Ely Place, Holborn, London EC1N 6SJ. It is on the Campaign for Real Ale's National Inventory of Historic Pub Interiors.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Ye_Olde_Mitre",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/47/Ye_Olde_Mitre_Tavern_-_geograph.org.uk_-_763877.jpg"
   },
   {
     "id": "osm-node-2558617434",
@@ -37580,7 +37640,10 @@
     "sunPattern": "midday",
     "peakSunHour": 11.7,
     "sunStartHour": 7.7,
-    "sunEndHour": 14.8
+    "sunEndHour": 14.8,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hand_and_Shears",
+    "description": "The Hand and Shears is a Grade II listed public house at 1 Middle Street, Smithfield, London. It is on the Campaign for Real Ale's National Inventory of Historic Pub Interiors. It was built in the early-mid 19th century.",
+    "historic": true
   },
   {
     "id": "osm-node-10582361575",
@@ -37655,7 +37718,8 @@
     "historic": true,
     "listedStatus": "Grade II",
     "description": "The Ten Bells is a public house at the corner of Commercial Street and Fournier Street in Spitalfields in the East End of London. It is sometimes noted for its supposed association with at least two victims of Jack the Ripper: Annie Chapman and Mary Jane Kelly.",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ten_Bells"
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ten_Bells",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Outside_Ten_Bells_Public_House%2C_Spitalfields.jpg/960px-Outside_Ten_Bells_Public_House%2C_Spitalfields.jpg"
   },
   {
     "id": "osm-way-569138307",
@@ -38218,7 +38282,10 @@
     "sunPattern": "morning",
     "peakSunHour": 9.9,
     "sunStartHour": 5,
-    "sunEndHour": 14.9
+    "sunEndHour": 14.9,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marylebone_Lane",
+    "description": "Marylebone Lane is one of the original streets of the Marylebone district of the City of Westminster, London.",
+    "historic": true
   },
   {
     "id": "osm-way-422540678",
@@ -39408,7 +39475,8 @@
     "description": "The White Bear is a Grade II listed public house at 57 St John Street, Clerkenwell, London. It was built in 1899.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_White_Bear,_Clerkenwell",
     "yearEstablished": 1899,
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/White_Bear%2C_Smithfield%2C_EC1_%283587493695%29.jpg/960px-White_Bear%2C_Smithfield%2C_EC1_%283587493695%29.jpg"
   },
   {
     "id": "osm-node-29039088",
@@ -40345,7 +40413,8 @@
     "rating": 4.5,
     "description": "The Widow's Son is a Grade II* listed public house at 75 Devons Road, in Bromley-by-Bow, East London. It was built in the early 19th century, possibly 1848, and the existing building is supposedly on the site of an old widow's cottage.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Widow%27s_Son,_London",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/The_Widow%27s_Son%2C_London.jpg/960px-The_Widow%27s_Son%2C_London.jpg"
   },
   {
     "id": "osm-way-775919714",
@@ -42529,7 +42598,9 @@
     "sunPattern": "morning",
     "peakSunHour": 10.4,
     "sunStartHour": 5,
-    "sunEndHour": 14.2
+    "sunEndHour": 14.2,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clerkenwell",
+    "description": "Clerkenwell ( KLAHRK-ən-well) is an area of central London, England. Clerkenwell was an ancient parish from the medieval period onwards, and now forms the south-western part of the London Borough of Islington."
   },
   {
     "id": "osm-way-638542138",
@@ -44498,7 +44569,8 @@
     "description": "The Joiners Arms was an LGBT pub and nightclub on Hackney Road in East London. The original pub, which closed in 2015, had been central to the East London gay scene since it was opened in 1997 by David Alexander Pollard.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Joiners_Arms",
     "yearEstablished": 1997,
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Joiners_Arms%2C_Shoreditch%2C_E2_%287371431390%29.jpg/960px-Joiners_Arms%2C_Shoreditch%2C_E2_%287371431390%29.jpg"
   },
   {
     "id": "osm-way-337127150",
@@ -44524,7 +44596,8 @@
     "description": "The Crown and Anchor is a Grade II listed public house at 137 Drummond Street, Euston, London NW1 2HL. It was built in the 19th century.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Crown_and_Anchor,_Euston",
     "historic": true,
-    "website": "https://www.thecrownandanchornw1.co.uk/"
+    "website": "https://www.thecrownandanchornw1.co.uk/",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Crown_and_Anchor%2C_Somers_Town%2C_NW1_%282630808524%29.jpg/960px-Crown_and_Anchor%2C_Somers_Town%2C_NW1_%282630808524%29.jpg"
   },
   {
     "id": "osm-way-445139621",
@@ -46421,7 +46494,8 @@
     ],
     "description": "The Palm Tree is a Grade II listed public house at 127 Grove Road, Mile End, and is within Mile End Park. It was built in 1935 for Truman's Brewery and designed by Eedle and Meyers. It was Grade II listed in 2015 by Historic England.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Palm_Tree,_Mile_End",
-    "yearEstablished": 1935
+    "yearEstablished": 1935,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Palm_Tree%2C_Mile_End%2C_E3_%281469900334%29.jpg/960px-Palm_Tree%2C_Mile_End%2C_E3_%281469900334%29.jpg"
   },
   {
     "id": "osm-node-300500863",
@@ -47383,7 +47457,8 @@
     "description": "The Old Red Lion (ORL), also known as the Old Red Lion Theatre (ORLT) and The Old Red, is a pub and fringe theatre, at Angel, in the London Borough of Islington. The theatre was founded in 1979 as the Old Red Lion Theatre Club.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Old_Red_Lion,_Islington",
     "yearEstablished": 1979,
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Old_red_lion_theatre_smc.JPG/960px-Old_red_lion_theatre_smc.JPG"
   },
   {
     "id": "osm-way-153779530",
@@ -47409,7 +47484,8 @@
     "yearEstablished": 1835,
     "description": "The Wenlock Arms is a public house in Hoxton, in East London which began trading in 1787. The pub is located halfway between Old Street and Angel, just off the City Road and the City Road Basin and Wenlock Basin on the Regent's Canal.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Wenlock_Arms",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/The_Wenlock_Arms_.jpg/960px-The_Wenlock_Arms_.jpg"
   },
   {
     "id": "osm-way-352696768",
@@ -49004,7 +49080,8 @@
     "description": "The Angel, Islington, is a historic landmark and a series of buildings that have stood on the corner of Islington High Street and Pentonville Road in Islington, London, England.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Angel,_Islington",
     "yearEstablished": 1756,
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/The_Angel%2C_Islington_%28geograph_5052750%29.jpg/960px-The_Angel%2C_Islington_%28geograph_5052750%29.jpg"
   },
   {
     "id": "gp-51.53479--0.10735",
@@ -49770,7 +49847,10 @@
     "sunPattern": "all-day",
     "peakSunHour": 11.7,
     "sunStartHour": 5,
-    "sunEndHour": 18.3
+    "sunEndHour": 18.3,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dublin_Castle,_Camden",
+    "description": "The Dublin Castle is a pub and live music venue in Camden Town, London. It gained prominence as a venue in the late 1970s after the band Madness established a live reputation there.",
+    "historic": true
   },
   {
     "id": "osm-node-10092511647",
@@ -51237,7 +51317,8 @@
     "rating": 4.5,
     "description": "The Black Cap is a pub in Camden Town, London known for its drag cabaret, and popular from the mid-1960s until it closed in April 2015.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Black_Cap",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/The_Black_Cap%2C_London%2C_2006-07-25_um_12-27-06.jpg/960px-The_Black_Cap%2C_London%2C_2006-07-25_um_12-27-06.jpg"
   },
   {
     "id": "osm-way-293285859",
@@ -51566,7 +51647,8 @@
     "rating": 4.4,
     "description": "The World's End is a pub and music venue at 174 Camden High Street in Camden Town, London, England, just south of Camden Town tube station with an additional branch at Finsbury Park, 23 Stroud Green Rd, London.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_World%27s_End,_Camden",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/PubCamdenTown.jpg/960px-PubCamdenTown.jpg"
   },
   {
     "id": "osm-node-302410081",
@@ -51903,7 +51985,8 @@
     "historic": true,
     "listedStatus": "Grade II",
     "description": "The Dolphin is a Grade II listed public house and nightclub at 165 Mare Street, Hackney Central in the London Borough of Hackney, London. It is on the Campaign for Real Ale's National Inventory of Historic Pub Interiors.",
-    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Dolphin,_Hackney"
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Dolphin,_Hackney",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d9/The_%27Dolphin%27%2C_Mare_Street%2C_Hackney_-_geograph.org.uk_-_667057.jpg"
   },
   {
     "id": "osm-way-1009113811",
@@ -53267,7 +53350,10 @@
     "sunPattern": "all-day",
     "peakSunHour": 12.6,
     "sunStartHour": 5.2,
-    "sunEndHour": 18.8
+    "sunEndHour": 18.8,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Hawley_Arms,_Camden",
+    "description": "The Hawley Arms is a pub in Camden Town, London.",
+    "historic": true
   },
   {
     "id": "osm-way-849493954",
@@ -54568,7 +54654,8 @@
     "description": "The Black Lion is a Grade II* listed public house at 274 Kilburn High Road, Kilburn, London. It is on the Campaign for Real Ale's National Inventory of Historic Pub Interiors. It was built in about 1898 by the architect R. A.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Black_Lion,_Kilburn",
     "yearEstablished": 1898,
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9c/The_Black_Lion%2C_Kilburn_High_Road_-_geograph.org.uk_-_490934.jpg"
   },
   {
     "id": "osm-node-276369831",
@@ -55540,7 +55627,8 @@
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Washington,_Belsize_Park",
     "yearEstablished": 1865,
     "historic": true,
-    "website": "http://www.thewashingtonhampstead.co.uk/"
+    "website": "http://www.thewashingtonhampstead.co.uk/",
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Washington%2C_Belsize_Park%2C_NW3_%283905278876%29.jpg/960px-Washington%2C_Belsize_Park%2C_NW3_%283905278876%29.jpg"
   },
   {
     "id": "osm-way-272507642",
@@ -59395,7 +59483,8 @@
     "description": "The Flask is a Grade II listed public house at 14 Flask Walk, Hampstead, London, on the site from where the trade in Hampstead mineral water was run, and which is mentioned in the eighteenth-century novel Clarissa. It has been owned by Young's Brewery since 1904.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Flask,_Hampstead",
     "yearEstablished": 1904,
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/0/05/The_Flask%2C_Hampstead_-_geograph.org.uk_-_521664.jpg"
   },
   {
     "id": "osm-way-172055445",
@@ -59930,7 +60019,8 @@
     "hygieneRating": 5,
     "description": "The Wells Tavern is a Grade II listed public house at 30 Well Walk, Hampstead, London. It was built in about 1849.",
     "wikipediaUrl": "https://en.wikipedia.org/wiki/Wells_Tavern,_Hampstead",
-    "historic": true
+    "historic": true,
+    "heroImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Wells_Tavern%2C_Hampstead%2C_NW3_%282629997899%29.jpg/960px-Wells_Tavern%2C_Hampstead%2C_NW3_%282629997899%29.jpg"
   },
   {
     "id": "osm-way-696155924",
