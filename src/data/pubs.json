@@ -2835,7 +2835,6 @@
     "address": "189, Greenwich High Road, London, SE10 8JA",
     "openingHours": "Su-We 12:00-23:00, Th 12:00-24:00, Fr,Sa 11:00-26:00",
     "phone": "+44 20 8858 3591",
-    "website": "https://www.belushis.com/bars/london/greenwich",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -8175,7 +8174,6 @@
     "name": "Riley's Sports bar",
     "lat": 51.4922283,
     "lng": -0.1502694,
-    "website": "https://www.rileys.co.uk/venues/victoria",
     "hasFood": true,
     "hasLiveSport": true,
     "hasPoolTable": true,
@@ -10511,7 +10509,6 @@
     "lng": -0.081339,
     "address": "102a, Tower Bridge Road, London, SE1 4TP",
     "openingHours": "Su-Th 18:00-02:00; Fr-Sa 18:00-03:30",
-    "website": "http://bermondseyartsclub.co.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -10834,7 +10831,6 @@
     "lat": 51.4972113,
     "lng": -0.1412386,
     "address": "2, Cardinal Walk, London, SW1E 5AG",
-    "website": "http://www.hahaonline.co.uk/victoria/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -13017,7 +13013,6 @@
     "lng": -0.0879561,
     "address": "111, Long Lane, London, SE1 4PH",
     "phone": "+44 20 7357 6281",
-    "website": "https://www.theoldschoolyard.com/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -22020,8 +22015,7 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "rating": 4.3,
-    "website": "https://www.thewarwick.co.uk/"
+    "rating": 4.3
   },
   {
     "id": "osm-node-13273139801",
@@ -28342,7 +28336,7 @@
     "lat": 51.513588,
     "lng": -0.0053807,
     "address": "50, Aberfeldy Street, London, E14 0NU",
-    "hasFood": false,
+    "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
     "hasDarts": false,
@@ -28354,7 +28348,8 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "rating": 4.8
+    "rating": 4.8,
+    "hygieneRating": 4
   },
   {
     "id": "osm-node-2945792753",
@@ -32283,8 +32278,7 @@
     "hasQuizNight": false,
     "hasLiveMusic": false,
     "hasRealFire": false,
-    "hasWifi": true,
-    "website": "https://www.freud.eu/"
+    "hasWifi": true
   },
   {
     "id": "osm-node-4503830991",
@@ -34205,7 +34199,6 @@
     "address": "40, Commercial Street, London, E1 6LP",
     "openingHours": "Mo-Th 11:00-24:00, Fr,Sa 11:00-02:00, Su 11:00-23:00",
     "phone": "+44 20 7247 5371",
-    "website": "https://www.theculpeper.com/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -38700,8 +38693,7 @@
     "hasRealFire": false,
     "hasWifi": false,
     "hygieneRating": 5,
-    "rating": 4.3,
-    "website": "https://www.the-white-hart.co.uk/"
+    "rating": 4.3
   },
   {
     "id": "osm-node-475933772",
@@ -39262,7 +39254,6 @@
     "lat": 51.5207515,
     "lng": -0.1625269,
     "address": "29a, Enford Street, London, W1H 1DN",
-    "website": "http://www.thornburycastle.uk.com/",
     "hasFood": false,
     "hasLiveSport": true,
     "hasPoolTable": false,
@@ -48888,8 +48879,7 @@
     "hasLiveMusic": true,
     "hasRealFire": false,
     "hasWifi": false,
-    "rating": 4,
-    "website": "http://www.purpleturtlecamden.co.uk/"
+    "rating": 4
   },
   {
     "id": "osm-way-225442626",
@@ -49199,8 +49189,7 @@
     "hasRealFire": true,
     "hasWifi": true,
     "rating": 4.7,
-    "hygieneRating": 4,
-    "website": "https://www.eleanorarms.co.uk/"
+    "hygieneRating": 4
   },
   {
     "id": "osm-way-109187435",
@@ -50417,7 +50406,6 @@
     "hasWifi": false,
     "hygieneRating": 2,
     "rating": 4.1,
-    "website": "http://www.thehemingway.co.uk/",
     "avgSunPercentage": 32,
     "bestSunPercentage": 92,
     "heroImageUrl": "https://szfypeyeyvbgrwysoarl.supabase.co/storage/v1/object/public/pits-pub-assets/pub-hero-images/pub-1746992072926-hero-1749106854126.jpg",
@@ -52731,8 +52719,7 @@
     "hasQuizNight": false,
     "hasLiveMusic": false,
     "hasRealFire": false,
-    "hasWifi": false,
-    "website": "http://thetaprooms.co.uk/"
+    "hasWifi": false
   },
   {
     "id": "osm-way-357565938",
@@ -53949,7 +53936,6 @@
     "hasWifi": false,
     "rating": 4.3,
     "hygieneRating": 3,
-    "website": "http://www.lock-tavern.co.uk/",
     "avgSunPercentage": 67,
     "bestSunPercentage": 100,
     "heroImageUrl": "https://sb.pubsinthesun.com/storage/v1/object/public/pits-pub-assets/pub-hero-images/pub-880-hero-1775806519848.jpg",
@@ -57139,8 +57125,7 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "hygieneRating": 1,
-    "website": "http://dalstonjazzclubrestaurant.co.uk/"
+    "hygieneRating": 1
   },
   {
     "id": "osm-node-305415323",
@@ -60807,7 +60792,6 @@
     "lng": -0.0739549,
     "address": "175, Stoke Newington High Street, London, N16 0LH",
     "openingHours": "Mo-We 16:00-00:00, Th 16:00-01:00, Fr 16:00-02:30, Sa 12:00-02:30, Su 12:00-23:00",
-    "website": "https://www.threecrownsn16.com/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -60827,7 +60811,6 @@
     "lat": 51.5621365,
     "lng": -0.0806064,
     "address": "132, Stoke Newington Church Street, London, N16 0JX",
-    "website": "http://www.thelionn16.co.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
