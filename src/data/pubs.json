@@ -25807,7 +25807,6 @@
     "lat": 51.5126971,
     "lng": -0.1083086,
     "address": "36, Tudor Street, London, EC4Y 0BH",
-    "website": "https://www.wearebarcollective.com/tudor-street/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -27104,7 +27103,6 @@
     "lng": -0.2180273,
     "address": "41, Bramley Road, London",
     "phone": "+44 20 7229 1111",
-    "website": "https://housebars.co.uk/gardenbar/",
     "hasFood": false,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -33722,7 +33720,8 @@
     "hasQuizNight": false,
     "hasLiveMusic": false,
     "hasRealFire": false,
-    "hasWifi": false
+    "hasWifi": false,
+    "hygieneRating": 4
   },
   {
     "id": "osm-way-157759518",
@@ -45169,7 +45168,6 @@
     "lng": -0.1205826,
     "address": "28, Harrison Street, London, WC1H 8JF",
     "openingHours": "Mo-Su 12:00-23:00",
-    "website": "https://harrisonbar.co.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -56553,7 +56551,6 @@
     "lat": 51.5468026,
     "lng": -0.1589108,
     "address": "97, Haverstock Hill, London, NW3 4RL",
-    "website": "https://thesteelespub.co.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
