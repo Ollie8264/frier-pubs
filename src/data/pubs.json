@@ -15538,7 +15538,6 @@
     "address": "243, Union Street, London, SE1 0LR",
     "openingHours": "Mo-Sa 12:00-23:00; Su 12:00-22:30",
     "phone": "+44 20 7207 2701",
-    "website": "https://www.lordnelsonsouthwark.com/",
     "hasFood": true,
     "hasLiveSport": true,
     "hasPoolTable": false,
@@ -16777,8 +16776,7 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "rating": 4.3,
-    "website": "https://tworuba.com/"
+    "rating": 4.3
   },
   {
     "id": "osm-node-13809413503",
@@ -18242,7 +18240,6 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "website": "https://www.greeneking-pubs.co.uk/pubs/greater-london/kings-arms-mayfair",
     "avgSunPercentage": 41,
     "bestSunPercentage": 100,
     "heroImageUrl": "https://sb.pubsinthesun.com/storage/v1/object/public/pits-pub-assets/pub-hero-images/pub-1159-hero-1775544816511.jpg",
@@ -32404,7 +32401,6 @@
     "lat": 51.5155032,
     "lng": -0.205607,
     "address": "192, Kensington Park Road, London, W11 2ES",
-    "website": "https://fishandbubbles.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -46237,7 +46233,6 @@
     "lat": 51.5288525,
     "lng": -0.2162893,
     "address": "19, Kilburn Lane, London, W10 4AE",
-    "website": "http://www.theparadise.co.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
