@@ -4143,7 +4143,7 @@
     "lat": 51.4813478,
     "lng": -0.1981412,
     "address": "17, Vanston Place, London, SW6 1AY",
-    "hasFood": false,
+    "hasFood": true,
     "hasLiveSport": true,
     "hasPoolTable": true,
     "hasDarts": false,
@@ -4155,7 +4155,8 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "rating": 4.4
+    "rating": 4.4,
+    "hygieneRating": 4
   },
   {
     "id": "osm-way-150574019",
@@ -30378,7 +30379,6 @@
     "lat": 51.5145746,
     "lng": -0.1114169,
     "address": "115, Chancery Lane, London, WC2A 1PP",
-    "website": "https://www.baranis.co.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
