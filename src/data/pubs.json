@@ -11423,7 +11423,8 @@
     "sunPattern": "midday",
     "peakSunHour": 12.1,
     "sunStartHour": 9.5,
-    "sunEndHour": 14.7
+    "sunEndHour": 14.7,
+    "hygieneRating": 5
   },
   {
     "id": "osm-way-538990064",
@@ -27093,7 +27094,7 @@
     "lng": -0.2180273,
     "address": "41, Bramley Road, London",
     "phone": "+44 20 7229 1111",
-    "hasFood": false,
+    "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
     "hasDarts": false,
@@ -27113,7 +27114,8 @@
     "sunPattern": "all-day",
     "peakSunHour": 10.1,
     "sunStartHour": 5,
-    "sunEndHour": 16.1
+    "sunEndHour": 16.1,
+    "hygieneRating": 5
   },
   {
     "id": "osm-way-161420189",
@@ -27619,7 +27621,8 @@
     "hasQuizNight": false,
     "hasLiveMusic": true,
     "hasRealFire": false,
-    "hasWifi": false
+    "hasWifi": false,
+    "hygieneRating": 5
   },
   {
     "id": "google-51.51333--0.20260",
@@ -52106,7 +52109,6 @@
     "address": "7, Roach Road, London, E3 2PA",
     "openingHours": "Mo-Th,Su 09:00-23:00; Fr 09:00-24:00; Sa 09:00-01:00",
     "phone": "+44 20 7183 0089",
-    "website": "https://twomoreyears.co.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
