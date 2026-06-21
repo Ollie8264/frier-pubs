@@ -7238,8 +7238,7 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": true,
-    "rating": 4.3,
-    "website": "https://www.theboltonearlscourt.co.uk/"
+    "rating": 4.3
   },
   {
     "id": "osm-way-97202478",
@@ -8599,8 +8598,7 @@
     "hasQuizNight": false,
     "hasLiveMusic": false,
     "hasRealFire": false,
-    "hasWifi": false,
-    "website": "http://www.thepineapple.co.uk/"
+    "hasWifi": false
   },
   {
     "id": "osm-way-121272357",
@@ -9431,7 +9429,8 @@
     "hasLiveMusic": true,
     "hasRealFire": false,
     "hasWifi": false,
-    "rating": 4.4
+    "rating": 4.4,
+    "hygieneRating": 5
   },
   {
     "id": "osm-way-148723643",
@@ -11383,7 +11382,6 @@
     "lat": 51.4979862,
     "lng": -0.2074023,
     "address": "34, Holland Road, London, W14 8BA",
-    "website": "https://www.crownandsceptrepub.com/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -38491,7 +38489,6 @@
     "lat": 51.5200584,
     "lng": -0.1624203,
     "address": "74-76, York Street, London, W1H 1QN",
-    "website": "https://www.theroyaloakw1.com/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -40612,7 +40609,6 @@
     "address": "23-24, Shoreditch High Street, London, E1 6PG",
     "openingHours": "Fr-Sa 12:00-01:00; Su-Th 12:00-24:00",
     "phone": "+44 20 7426 0754",
-    "website": "https://theedgeshoreditch.co.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -50940,7 +50936,6 @@
     "address": "1, Lewis Cubitt Walk, London, N1C 4DL",
     "openingHours": "Mo 12:00-22:00; Tu-Fr 12:00-23:00; Sa 12:00-24:00; Su 12:00-22:00",
     "phone": "+44 20 8161 4446",
-    "website": "https://www.babelbeerhouse.com/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -51105,7 +51100,7 @@
     "lat": 51.538214,
     "lng": -0.0064228,
     "address": "30, Carpenters Road, London, E15 2JH",
-    "hasFood": false,
+    "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": true,
     "hasDarts": false,
@@ -51125,7 +51120,8 @@
     "sunPattern": "all-day",
     "peakSunHour": 10.7,
     "sunStartHour": 5,
-    "sunEndHour": 17.7
+    "sunEndHour": 17.7,
+    "hygieneRating": 1
   },
   {
     "id": "osm-way-1282119568",
@@ -57003,7 +56999,6 @@
     "lng": -0.0878039,
     "address": "59, Newington Green Road, London, N1 4QU",
     "phone": "+44 20 7226 3531",
-    "website": "https://thealmaislington.com/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
