@@ -21188,8 +21188,7 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "hygieneRating": 5,
-    "website": "https://www.feeneyspubs.com/marklane"
+    "hygieneRating": 5
   },
   {
     "id": "osm-node-4972504270",
@@ -24273,7 +24272,6 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "website": "https://www.feeneyspubs.com/feeneys-5-lloyds-avenue",
     "avgSunPercentage": 23,
     "bestSunPercentage": 92,
     "heroImageUrl": "https://sb.pubsinthesun.com/storage/v1/object/public/pits-pub-assets/pub-hero-images/pub-2220-hero-1778052480679.jpg",
@@ -25080,7 +25078,8 @@
     "hasQuizNight": false,
     "hasLiveMusic": false,
     "hasRealFire": false,
-    "hasWifi": true
+    "hasWifi": true,
+    "hygieneRating": "AwaitingInspection"
   },
   {
     "id": "osm-way-191304272",
@@ -36177,7 +36176,7 @@
     "lat": 51.5184192,
     "lng": -0.1547788,
     "address": "56, Blandford Street, London, W1U 7JA",
-    "hasFood": false,
+    "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
     "hasDarts": false,
@@ -36188,7 +36187,8 @@
     "hasQuizNight": false,
     "hasLiveMusic": false,
     "hasRealFire": false,
-    "hasWifi": false
+    "hasWifi": false,
+    "hygieneRating": "AwaitingInspection"
   },
   {
     "id": "osm-way-420644092",
