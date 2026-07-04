@@ -5,7 +5,7 @@
     "lat": 51.469896,
     "lng": -0.1712821,
     "address": "1-13, Falcon Road, London, SW11 2PL",
-    "hasFood": false,
+    "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
     "hasDarts": false,
@@ -20,7 +20,8 @@
     "sunPattern": "all-day",
     "peakSunHour": 11.1,
     "sunStartHour": 5,
-    "sunEndHour": 17.3
+    "sunEndHour": 17.3,
+    "hygieneRating": 5
   },
   {
     "id": "osm-way-597454245",
