@@ -11483,7 +11483,7 @@
     "lng": -0.1434293,
     "address": "43, Buckingham Palace Road, London, SW1W 0PP",
     "website": "https://www.bbarlondon.com/",
-    "hasFood": false,
+    "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
     "hasDarts": false,
@@ -11495,7 +11495,8 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "rating": 4.5
+    "rating": 4.5,
+    "hygieneRating": "AwaitingInspection"
   },
   {
     "id": "osm-way-209682393",
@@ -34012,7 +34013,7 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "hygieneRating": 0,
+    "hygieneRating": 1,
     "avgSunPercentage": 18,
     "bestSunPercentage": 100,
     "heroImageUrl": "https://sb.pubsinthesun.com/storage/v1/object/public/pits-pub-assets/pub-hero-images/pub-2005-hero-1774779203542.jpg",
