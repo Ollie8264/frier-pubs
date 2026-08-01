@@ -28931,7 +28931,8 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "rating": 4.8
+    "rating": 4.8,
+    "hygieneRating": 5
   },
   {
     "id": "gp-51.51387--0.09546",
@@ -40712,7 +40713,7 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "hygieneRating": 0
+    "hygieneRating": 2
   },
   {
     "id": "osm-way-157322996",
@@ -46976,7 +46977,8 @@
     "sunPattern": "morning",
     "peakSunHour": 8.7,
     "sunStartHour": 5,
-    "sunEndHour": 12.9
+    "sunEndHour": 12.9,
+    "hygieneRating": "AwaitingInspection"
   },
   {
     "id": "osm-node-4841343672",
