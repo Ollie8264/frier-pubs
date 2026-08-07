@@ -841,7 +841,6 @@
     "address": "107-109, Blackheath Road, London, SE10 8PD",
     "openingHours": "Mo-Th, Sa 11:00-24:00; Fr 11:00-26:30; Su 11:30-23:00",
     "phone": "+44 20 8694 8542",
-    "website": "https://thegraduate.uk/",
     "hasFood": true,
     "hasLiveSport": true,
     "hasPoolTable": true,
@@ -5718,7 +5717,6 @@
     "address": "3, St George Wharf, London, SW8 2LE",
     "openingHours": "Mo-Su 13:00-23:00",
     "phone": "+44 20 7735 3600",
-    "website": "https://www.thewaterfront.london/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -20153,7 +20151,6 @@
     "address": "76, Narrow Street, London, E14 8BP",
     "openingHours": "Mo-Sa 12:00-23:00; Su 12:00-22:30",
     "phone": "+44 20 7987 4396",
-    "website": "https://www.thegrapes.co.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -28239,7 +28236,6 @@
     "lng": -0.0400264,
     "address": "17, Barnes Street, London, E14 7NW",
     "openingHours": "Mo 12:00-22:00; Tu 12:00-23:00; We 12:00-00:00; Th 12:00-23:00; Fr-Su 12:00-00:00",
-    "website": "https://www.oldship.net/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -43164,7 +43160,6 @@
     "lng": -0.0715659,
     "address": "125-127, Bethnal Green Road, London, E2 7DG",
     "openingHours": "Tu-Sa 17:00-00:00; Su 12:00-22:00",
-    "website": "https://littlefires.bar/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -50222,7 +50217,7 @@
     "hasLiveMusic": true,
     "hasRealFire": false,
     "hasWifi": false,
-    "hygieneRating": 0
+    "hygieneRating": 5
   },
   {
     "id": "osm-way-98612270",
@@ -60497,7 +60492,7 @@
     "lng": -0.0998166,
     "address": "126, Blackstock Road, London, N4 2DR",
     "openingHours": "Su-th 11:00-24:00; fr-sa 11:00-01:00",
-    "hasFood": false,
+    "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
     "hasDarts": false,
@@ -60512,7 +60507,8 @@
     "sunPattern": "morning",
     "peakSunHour": 8.4,
     "sunStartHour": 5,
-    "sunEndHour": 13.5
+    "sunEndHour": 13.5,
+    "hygieneRating": 5
   },
   {
     "id": "osm-node-262637210",
