@@ -49,7 +49,6 @@
     "lng": -0.0948102,
     "address": "61-63, Coldharbour Lane, London, SE5 9NS",
     "phone": "+44 20 7737 5861",
-    "website": "https://www.suncamberwell.com/",
     "hasFood": true,
     "hasLiveSport": true,
     "hasPoolTable": false,
@@ -2977,7 +2976,6 @@
     "address": "120-122, Deptford High Street, London, SE8 4NS",
     "openingHours": "Mo-Th 16:00-23:00; Fr 16:00-25:00; Sa 12:00-25:00; Su 12:00-22:30",
     "phone": "+44 20 8692 6859",
-    "website": "https://jamcircus.com/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -12776,7 +12774,6 @@
     "address": "137, Lower Marsh, London, SE1 7AE",
     "openingHours": "Mo-Fr 16:00-23:00",
     "phone": "+44 20 7803 9035",
-    "website": "https://unwinedbars.co.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -12908,7 +12905,6 @@
     "lng": -0.0842325,
     "address": "15, Leathermarket Street",
     "phone": "+44 20 7407 0295",
-    "website": "https://www.theleatherexchange.co.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -18005,7 +18001,6 @@
     "address": "53, Whitehall, London, SW1A 2HP",
     "openingHours": "Mo-Sa 11:00-23:00; Su 12:00-23:00",
     "phone": "+44 20 7930 4808",
-    "website": "http://www.theclarencewhitehall.co.uk/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -32099,7 +32094,8 @@
     "hasLiveMusic": true,
     "hasRealFire": false,
     "hasWifi": false,
-    "rating": 4.4
+    "rating": 4.4,
+    "hygieneRating": 5
   },
   {
     "id": "osm-way-363039919",
@@ -42118,8 +42114,7 @@
     "hasQuizNight": false,
     "hasLiveMusic": false,
     "hasRealFire": false,
-    "hasWifi": false,
-    "website": "https://www.imperialhotels.co.uk/eat-drink/london-pub"
+    "hasWifi": false
   },
   {
     "id": "osm-node-830477754",
@@ -48993,7 +48988,8 @@
     "sunPattern": "all-day",
     "peakSunHour": 9.7,
     "sunStartHour": 5,
-    "sunEndHour": 15.5
+    "sunEndHour": 15.5,
+    "hygieneRating": "AwaitingInspection"
   },
   {
     "id": "osm-way-225465143",
@@ -49688,7 +49684,7 @@
     "lng": -0.1039971,
     "address": "70 Upper St, London N1 0NY, UK",
     "rating": 4.4,
-    "hasFood": false,
+    "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
     "hasDarts": false,
@@ -49699,7 +49695,8 @@
     "hasQuizNight": false,
     "hasLiveMusic": false,
     "hasRealFire": false,
-    "hasWifi": false
+    "hasWifi": false,
+    "hygieneRating": 5
   },
   {
     "id": "osm-way-770081717",
@@ -59593,7 +59590,6 @@
     "lng": -0.0562913,
     "address": "231, Lower Clapton Road, London, E5 8EG",
     "phone": "+44 20 8985 8124",
-    "website": "https://www.claptonhart.com/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
