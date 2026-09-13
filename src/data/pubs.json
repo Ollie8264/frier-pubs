@@ -14696,7 +14696,8 @@
     "hasLiveMusic": false,
     "hasRealFire": true,
     "hasWifi": true,
-    "rating": 4.3
+    "rating": 4.3,
+    "hygieneRating": "AwaitingInspection"
   },
   {
     "id": "gp-51.50255--0.08307",
@@ -23618,7 +23619,8 @@
     "hasRealFire": false,
     "hasWifi": true,
     "rating": 4.4,
-    "website": "https://www.nicholsonspubs.co.uk/restaurants/london/thewellingtonstrandlondon"
+    "website": "https://www.nicholsonspubs.co.uk/restaurants/london/thewellingtonstrandlondon",
+    "hygieneRating": "AwaitingInspection"
   },
   {
     "id": "osm-node-25475187",
@@ -44116,7 +44118,6 @@
     "lat": 51.5263091,
     "lng": -0.1113191,
     "address": "22, Easton Street, London, WC1X 0DS",
-    "website": "https://www.publove.co.uk/pubs/queens-head",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -56945,7 +56946,6 @@
     "lat": 51.5486787,
     "lng": -0.0767174,
     "address": "10A, Bradbury Street, London, N16 8JN",
-    "website": "http://www.servantjazzquarters.com/",
     "hasFood": false,
     "hasLiveSport": false,
     "hasPoolTable": false,
