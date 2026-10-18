@@ -9170,7 +9170,8 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": true,
-    "rating": 4.2
+    "rating": 4.2,
+    "hygieneRating": 3
   },
   {
     "id": "osm-way-85166329",
@@ -12599,7 +12600,8 @@
     "sunPattern": "morning",
     "peakSunHour": 9.3,
     "sunStartHour": 5,
-    "sunEndHour": 15
+    "sunEndHour": 15,
+    "hygieneRating": 5
   },
   {
     "id": "osm-way-151490690",
