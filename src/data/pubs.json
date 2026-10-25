@@ -2199,7 +2199,6 @@
     "address": "323, New Cross Road, London, SE14 6AS",
     "openingHours": "Mo-Th 18:00-27:00; Fr-Sa 18:00-28:00; Su 18:00-26:00",
     "phone": "+44 20 8469 4382",
-    "website": "https://www.newcrossinn.com/",
     "hasFood": true,
     "hasLiveSport": false,
     "hasPoolTable": false,
@@ -36671,7 +36670,8 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "rating": 4.4
+    "rating": 4.4,
+    "hygieneRating": 4
   },
   {
     "id": "osm-node-7083390802",
