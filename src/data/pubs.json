@@ -29409,7 +29409,8 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "rating": 4.2
+    "rating": 4.2,
+    "hygieneRating": 5
   },
   {
     "id": "osm-way-60890308",
@@ -39451,7 +39452,8 @@
     "hasLiveMusic": false,
     "hasRealFire": false,
     "hasWifi": false,
-    "rating": 4.8
+    "rating": 4.8,
+    "hygieneRating": "AwaitingInspection"
   },
   {
     "id": "osm-way-148878074",
